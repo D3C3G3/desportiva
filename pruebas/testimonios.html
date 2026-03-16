@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<script>if(localStorage.getItem('autoelite-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEscuela Elite — Opiniones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* RATING OVERVIEW */
+        .rating-hero{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;background:var(--blue);border-radius:8px;padding:48px;margin-bottom:56px;border:3px solid var(--yellow);}
+        .rating-left{text-align:center;}
+        .rating-big{font-family:'Bebas Neue',sans-serif;font-size:100px;color:var(--yellow);line-height:1;}
+        .rating-stars{color:var(--yellow);font-size:28px;margin:4px 0;}
+        .rating-count{color:rgba(255,255,255,0.6);font-size:13px;}
+        .rating-bars{display:flex;flex-direction:column;gap:10px;}
+        .rb-row{display:flex;align-items:center;gap:14px;font-size:14px;}
+        .rb-label{color:rgba(255,255,255,0.7);min-width:40px;}
+        .rb-track{flex:1;height:8px;background:rgba(255,255,255,0.15);border-radius:4px;overflow:hidden;}
+        .rb-fill{height:100%;background:var(--yellow);border-radius:4px;transition:width 1.2s ease;}
+        .rb-count{color:rgba(255,255,255,0.5);min-width:44px;text-align:right;}
+
+        /* FILTER */
+        .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+        .filter-btn{background:var(--white);border:2px solid var(--gray-border);color:var(--gray-mid);padding:10px 22px;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.25s;}
+        .filter-btn:hover,.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+        /* FEATURED */
+        .featured-review{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:8px;padding:48px;border:3px solid var(--yellow);margin-bottom:48px;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+        .fr-score{text-align:center;min-width:140px;}
+        .fr-big{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--yellow);line-height:1;}
+        .fr-stars{color:var(--yellow);font-size:22px;}
+        .fr-label{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+        .fr-quote{font-family:'DM Serif Display',serif;font-size:clamp(17px,2.5vw,24px);line-height:1.55;color:#fff;font-style:italic;margin-bottom:24px;}
+        .fr-author{display:flex;align-items:center;gap:16px;}
+        .fr-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;border:3px solid var(--yellow);flex-shrink:0;}
+        .fr-avatar img{width:100%;height:100%;object-fit:cover;}
+        .fr-name{font-size:16px;font-weight:700;color:#fff;}
+        .fr-detail{font-size:13px;color:rgba(255,255,255,0.55);}
+
+        /* REVIEWS GRID */
+        .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+        .rev-card{background:var(--white);border:1px solid var(--gray-border);border-radius:8px;padding:24px;transition:all 0.3s;display:flex;flex-direction:column;}
+        .rev-card:hover{border-color:var(--blue);box-shadow:0 10px 28px rgba(0,0,178,0.1);transform:translateY(-2px);}
+        .rev-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+        .rev-stars{color:#f5a623;font-size:14px;}
+        .rev-permit{background:var(--yellow);color:var(--blue);padding:3px 10px;border-radius:2px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+        .rev-text{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.6;color:var(--gray-text);font-style:italic;flex:1;margin-bottom:18px;}
+        .rev-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--gray-border);}
+        .rev-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--blue-light);flex-shrink:0;}
+        .rev-avatar img{width:100%;height:100%;object-fit:cover;}
+        /* 📸 Para avatares reales: <img src="alumno.jpg" alt=""> dentro de .rev-avatar */
+        .rev-name{font-size:14px;font-weight:700;color:var(--blue);}
+        .rev-date{font-size:12px;color:var(--gray-mid);}
+        .rev-source{margin-left:auto;font-size:11px;color:var(--gray-mid);font-style:italic;}
+
+        /* PLATFORMS */
+        .plat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+        .plat-card{background:var(--white);border:2px solid var(--gray-border);border-radius:8px;padding:32px;text-align:center;transition:all 0.3s;}
+        .plat-card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(0,0,178,0.1);transform:translateY(-3px);}
+        .plat-icon{font-size:40px;margin-bottom:14px;}
+        .plat-name{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:8px;}
+        .plat-score{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--blue);}
+        .plat-stars{color:#f5a623;font-size:18px;margin-bottom:6px;}
+        .plat-count{font-size:13px;color:var(--gray-mid);}
+
+        @media(max-width:1024px){
+            .rating-hero{grid-template-columns:1fr;gap:32px;}
+            .featured-review{grid-template-columns:1fr;}
+            .reviews-grid{grid-template-columns:1fr 1fr;}
+            .plat-row{grid-template-columns:1fr;}
+        }
+        @media(max-width:768px){.reviews-grid{grid-template-columns:1fr;}}
+    </style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+    <a href="index.html" class="nav-logo">AUTO<span>ELITE</span></a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="proceso.html">Cómo funciona</a></li>
+        <li><a href="instructores.html">Instructores</a></li>
+        <li><a href="testimonios.html" class="active">Opiniones</a></li>
+        <li><a href="contacto.html" class="nav-cta">Matricúlate</a></li>
+    </ul>
+    <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-content">
+        <div class="breadcrumb"><a href="index.html">Inicio</a><span class="sep">/</span><span class="current">Opiniones</span></div>
+        <span class="page-tag">Lo que dicen nuestros alumnos</span>
+        <h1 class="page-title">OPINIONES<br><em>REALES</em></h1>
+        <p class="page-subtitle">Más de 1.200 alumnos han compartido su experiencia. Sin filtros, sin trampa. Estas son sus palabras.</p>
+    </div>
+</div>
+
+<section class="section">
+    <!-- RATING OVERVIEW -->
+    <div class="rating-hero reveal" id="ratingHero">
+        <div class="rating-left">
+            <div class="rating-big">4.9</div>
+            <div class="rating-stars">★★★★★</div>
+            <div class="rating-count">1.247 opiniones verificadas</div>
+        </div>
+        <div class="rating-bars">
+            <div class="rb-row"><span class="rb-label">★ 5</span><div class="rb-track"><div class="rb-fill" style="width:0%" data-w="91%"></div></div><span class="rb-count">1.135</span></div>
+            <div class="rb-row"><span class="rb-label">★ 4</span><div class="rb-track"><div class="rb-fill" style="width:0%;background:rgba(255,255,0,0.7)" data-w="7%"></div></div><span class="rb-count">87</span></div>
+            <div class="rb-row"><span class="rb-label">★ 3</span><div class="rb-track"><div class="rb-fill" style="width:0%;background:rgba(255,255,255,0.3)" data-w="1.5%"></div></div><span class="rb-count">19</span></div>
+            <div class="rb-row"><span class="rb-label">★ 2</span><div class="rb-track"><div class="rb-fill" style="width:0%;background:rgba(255,255,255,0.15)" data-w="0.4%"></div></div><span class="rb-count">5</span></div>
+            <div class="rb-row"><span class="rb-label">★ 1</span><div class="rb-track"><div class="rb-fill" style="width:0%;background:rgba(255,255,255,0.08)" data-w="0.1%"></div></div><span class="rb-count">1</span></div>
+        </div>
+    </div>
+
+    <!-- FEATURED -->
+    <div class="featured-review reveal">
+        <div class="fr-score"><div class="fr-big">5.0</div><div class="fr-stars">★★★★★</div><div class="fr-label">Destacada</div></div>
+        <div>
+            <div class="fr-quote">"Llevaba años con miedo a conducir. Probé dos autoescuelas antes y siempre me rendía. Aquí, con Javier como instructor, conseguí el carnet en 4 meses. Si tienes miedo al volante, este es tu sitio."</div>
+            <div class="fr-author">
+                <!--
+                ╔═══════════════════════════════════╗
+                ║  📸  AVATAR ALUMNA DESTACADA       ║
+                ║  Para activar: <img src="elena.jpg">║
+                ╚═══════════════════════════════════╝
+                -->
+                <div class="fr-avatar"><div class="photo-placeholder" style="width:52px;height:52px;border-radius:50%;border:none;padding:0"><span style="font-size:22px">👤</span></div></div>
+                <div><div class="fr-name">Elena Martínez</div><div class="fr-detail">Permiso B · Instructor: Javier M. · Enero 2024</div></div>
+                <span style="margin-left:auto;font-size:12px;color:rgba(255,255,255,0.4)">Google ★</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filter-bar reveal">
+        <button class="filter-btn active" onclick="filterR('all',this)">Todas</button>
+        <button class="filter-btn" onclick="filterR('B',this)">Permiso B</button>
+        <button class="filter-btn" onclick="filterR('A',this)">Moto</button>
+        <button class="filter-btn" onclick="filterR('C',this)">Permiso C</button>
+        <button class="filter-btn" onclick="filterR('5',this)">Solo ★★★★★</button>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="reviews-grid">
+        <div class="rev-card reveal" data-permit="B" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso B</div></div>
+            <div class="rev-text">"Aprobé el teórico a la primera y el práctico al segundo. Los instructores son increíbles, muy pacientes."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">María López</div><div class="rev-date">Marzo 2024</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="A" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso A2</div></div>
+            <div class="rev-text">"Pablo es el mejor instructor de moto que podría haber pedido. Técnico, exigente. Aprobé en el primer intento."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Carlos García</div><div class="rev-date">Enero 2024</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="B" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso B</div></div>
+            <div class="rev-text">"Después de suspender en otra autoescuela vine aquí y aprobé todo en tiempo récord. El método es completamente diferente."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Ana Rodríguez</div><div class="rev-date">Febrero 2024</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="C" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso C</div></div>
+            <div class="rev-text">"Roberto me preparó para el C de manera brutal. Salí siendo un conductor profesional de verdad. Ahora trabajo en logística gracias a él."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Jorge Morales</div><div class="rev-date">Dic 2023</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="B" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso B</div></div>
+            <div class="rev-text">"La plataforma digital es una pasada. Hice todos los tests desde el metro. Aprobé el teórico con un 28/30."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Sofía Vargas</div><div class="rev-date">Febrero 2024</div></div><div class="rev-source">App Store</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="A" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso AM</div></div>
+            <div class="rev-text">"Para mi hijo de 15 años. Laura fue extraordinaria con él. Mucha paciencia. Ya conduce su ciclomotor fenomenal."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Pilar Torres</div><div class="rev-date">Enero 2024</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="B" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso B</div></div>
+            <div class="rev-text">"Soy de fuera y no conocía la ciudad. Mi instructor me fue llevando por zonas nuevas cada clase. Muy inteligente."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Ramón Navarro</div><div class="rev-date">Marzo 2024</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="B" data-stars="4">
+            <div class="rev-top"><div class="rev-stars" style="color:#aaa">★★★★☆</div><div class="rev-permit">Permiso B</div></div>
+            <div class="rev-text">"Muy buena experiencia en general. Tardé algo más de lo esperado pero el resultado fue excelente. Equipo muy profesional."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">Lucía Fernández</div><div class="rev-date">Nov 2023</div></div><div class="rev-source">Google</div></div>
+        </div>
+        <div class="rev-card reveal" data-permit="A" data-stars="5">
+            <div class="rev-top"><div class="rev-stars">★★★★★</div><div class="rev-permit">Permiso A</div></div>
+            <div class="rev-text">"Vine con el A2 y me ayudaron con el upgrade a A. Pablo conoce la moto como nadie. Aprobado al primer intento."</div>
+            <div class="rev-author"><div class="rev-avatar"><div class="photo-placeholder" style="width:40px;height:40px;border-radius:50%;border:none;padding:0"><span style="font-size:18px">👤</span></div></div><div><div class="rev-name">David López</div><div class="rev-date">Febrero 2024</div></div><div class="rev-source">Facebook</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PLATAFORMAS -->
+<section class="section section-alt">
+    <div class="section-header reveal"><span class="section-tag">Nuestra puntuación</span><h2 class="section-title">En cada <em>plataforma</em></h2><div class="section-divider"></div></div>
+    <div class="plat-row">
+        <div class="plat-card reveal"><div class="plat-icon">🌐</div><div class="plat-name">Google Reviews</div><div class="plat-stars">★★★★★</div><div class="plat-score">4.9</div><div class="plat-count">847 opiniones</div></div>
+        <div class="plat-card reveal"><div class="plat-icon">📘</div><div class="plat-name">Facebook</div><div class="plat-stars">★★★★★</div><div class="plat-score">4.8</div><div class="plat-count">312 opiniones</div></div>
+        <div class="plat-card reveal"><div class="plat-icon">🗺️</div><div class="plat-name">Apple Maps</div><div class="plat-stars">★★★★★</div><div class="plat-score">4.9</div><div class="plat-count">88 opiniones</div></div>
+    </div>
+</section>
+
+<div style="background:var(--yellow);padding:56px 60px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;border-top:3px solid var(--blue);" class="reveal">
+    <div><h3 style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--blue)">¿TE CONVENCEMOS?</h3><p style="color:var(--blue);font-size:15px;opacity:0.75;margin-top:4px">Únete a más de 1.200 alumnos satisfechos.</p></div>
+    <a href="contacto.html" class="btn-blue">Matricúlate ahora</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="nav-logo" style="display:inline-block;margin-bottom:4px">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
+        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+</footer>
+<script src="theme.js"></script>
+
+
+<!-- TOGGLE DARK/LIGHT — toggles.dev "Within" -->
+<div class="theme-toggle-wrap">
+    <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        title="Cambiar tema"
+        aria-label="Toggle theme"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            class="theme-toggle__within"
+            width="1em"
+            height="1em"
+            viewBox="0 0 32 32"
+            fill="currentColor"
+        >
+            <clipPath id="theme-toggle__within__clip">
+                <path d="M0 0h32v32h-32ZM6 16A1 1 0 0026 16 1 1 0 006 16" />
+            </clipPath>
+            <g clip-path="url(#theme-toggle__within__clip)">
+                <path d="M30.7 21.3 27.1 16l3.7-5.3c.4-.5.1-1.3-.6-1.4l-6.3-1.1-1.1-6.3c-.1-.6-.8-.9-1.4-.6L16 5l-5.4-3.7c-.5-.4-1.3-.1-1.4.6l-1 6.3-6.4 1.1c-.6.1-.9.9-.6 1.3L4.9 16l-3.7 5.3c-.4.5-.1 1.3.6 1.4l6.3 1.1 1.1 6.3c.1.6.8.9 1.4.6l5.3-3.7 5.3 3.7c.5.4 1.3.1 1.4-.6l1.1-6.3 6.3-1.1c.8-.1 1.1-.8.7-1.4zM16 25.1c-5.1 0-9.1-4.1-9.1-9.1 0-5.1 4.1-9.1 9.1-9.1s9.1 4.1 9.1 9.1c0 5.1-4 9.1-9.1 9.1z" />
+            </g>
+            <path
+                class="theme-toggle__within__circle"
+                d="M16 7.7c-4.6 0-8.2 3.7-8.2 8.2s3.6 8.4 8.2 8.4 8.2-3.7 8.2-8.2-3.6-8.4-8.2-8.4zm0 14.4c-3.4 0-6.1-2.9-6.1-6.2s2.7-6.1 6.1-6.1c3.4 0 6.1 2.9 6.1 6.2s-2.7 6.1-6.1 6.1z"
+            />
+            <path
+                class="theme-toggle__within__inner"
+                d="M16 9.5c-3.6 0-6.4 2.9-6.4 6.4s2.8 6.5 6.4 6.5 6.4-2.9 6.4-6.4-2.8-6.5-6.4-6.5z"
+            />
+        </svg>
+    </button>
+    <span class="theme-toggle-label" id="themeLabel">Modo oscuro</span>
+</div>
+<script>
+// Sync label text with current state
+document.addEventListener("DOMContentLoaded",function(){
+  var btn=document.getElementById("themeToggle");
+  var lbl=document.getElementById("themeLabel");
+  if(!btn||!lbl)return;
+  function syncLabel(){lbl.textContent=document.body.classList.contains("dark")?"Modo claro":"Modo oscuro";}
+  syncLabel();
+  btn.addEventListener("click",function(){setTimeout(syncLabel,50);});
+});
+</script>
+</body>
+</html>
