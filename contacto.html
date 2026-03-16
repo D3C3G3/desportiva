@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEscuela Elite — Contacto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* CONTACT LAYOUT */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+
+        /* INFO SIDE */
+        .contact-info-title { font-family: 'DM Serif Display', serif; font-size: 36px; margin-bottom: 16px; line-height: 1.2; }
+        .contact-info-desc { font-size: 15px; color: #777; line-height: 1.7; margin-bottom: 40px; }
+        .contact-items { display: flex; flex-direction: column; gap: 0; }
+        .contact-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid #1a1a1a; transition: padding-left 0.3s; cursor: default; }
+        .contact-item:first-child { padding-top: 0; }
+        .contact-item:hover { padding-left: 6px; }
+        .contact-item-icon { width: 48px; height: 48px; min-width: 48px; background: rgba(232,57,42,0.1); border: 1px solid rgba(232,57,42,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 18px; }
+        .contact-item-content { }
+        .contact-item-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 4px; }
+        .contact-item-value { font-size: 16px; color: var(--white); font-weight: 500; }
+        .contact-item-sub { font-size: 13px; color: #666; margin-top: 2px; }
+
+        /* HOURS */
+        .hours-table { width: 100%; margin-top: 32px; }
+        .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #1a1a1a; font-size: 14px; }
+        .hours-day { color: #888; }
+        .hours-time { color: var(--white); font-weight: 500; }
+        .hours-closed { color: #444; }
+        .hours-badge { background: rgba(232,57,42,0.1); border: 1px solid rgba(232,57,42,0.2); color: var(--accent); padding: 2px 8px; border-radius: 2px; font-size: 10px; letter-spacing: 1.5px; }
+
+        /* FORM SIDE */
+        .contact-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-title { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 8px; }
+        .form-subtitle { font-size: 14px; color: #666; margin-bottom: 28px; }
+        .form-checkbox { display: flex; align-items: flex-start; gap: 12px; }
+        .form-checkbox input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; }
+        .form-checkbox label { font-size: 13px; color: #666; line-height: 1.5; cursor: pointer; }
+        .form-checkbox a { color: var(--accent); }
+        .submit-btn { background: var(--accent); color: #fff; border: none; padding: 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .submit-btn:hover { background: #c5281a; transform: translateY(-2px); }
+        .submit-btn i { transition: transform 0.3s; }
+        .submit-btn:hover i { transform: translateX(4px); }
+        .form-note { font-size: 12px; color: #444; text-align: center; }
+        .form-note a { color: #666; }
+
+        /* SUCCESS MESSAGE */
+        .success-msg { display: none; background: rgba(46, 213, 115, 0.1); border: 1px solid rgba(46, 213, 115, 0.3); padding: 20px 24px; border-radius: 4px; color: #2ed573; font-size: 15px; text-align: center; }
+        .success-msg.show { display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        /* MAP PLACEHOLDER */
+        .map-section { margin-top: 80px; }
+        .map-container { background: var(--gray); border: 1px solid #1e1e1e; border-radius: 4px; overflow: hidden; height: 400px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .map-placeholder { text-align: center; }
+        .map-placeholder i { font-size: 48px; color: var(--accent); margin-bottom: 16px; }
+        .map-placeholder h3 { font-size: 22px; margin-bottom: 8px; }
+        .map-placeholder p { font-size: 14px; color: #666; }
+        .map-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-60%); font-size: 40px; animation: bounce 1.5s ease-in-out infinite; }
+        @keyframes bounce { 0%,100%{transform:translate(-50%,-60%)} 50%{transform:translate(-50%,-80%)} }
+        .map-overlay-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 40px 40px; }
+        .map-lines { position: absolute; inset: 0; overflow: hidden; }
+        .map-line-h { position: absolute; height: 2px; background: rgba(232,57,42,0.15); left: 0; right: 0; }
+        .map-line-v { position: absolute; width: 2px; background: rgba(232,57,42,0.1); top: 0; bottom: 0; }
+
+        /* WHATSAPP FLOAT */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; z-index: 90; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; text-decoration: none; }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+
+        /* QUICK ACTIONS */
+        .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+        .quick-action { background: var(--gray); border: 1px solid #1e1e1e; padding: 24px; border-radius: 4px; text-align: center; text-decoration: none; color: var(--white); transition: all 0.3s; }
+        .quick-action:hover { border-color: rgba(232,57,42,0.4); transform: translateY(-2px); background: #202020; }
+        .qa-icon { font-size: 28px; margin-bottom: 10px; }
+        .qa-label { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .qa-sub { font-size: 12px; color: #555; }
+
+        @media (max-width: 1024px) {
+            .contact-layout { grid-template-columns: 1fr; gap: 60px; }
+            .form-row { grid-template-columns: 1fr; }
+            .quick-actions { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/34600000000" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <nav>
+        <a href="index.html" class="nav-logo">AUTO<span>ELITE</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="proceso.html">Cómo funciona</a></li>
+            <li><a href="testimonios.html">Opiniones</a></li>
+            <li><a href="contacto.html" class="active nav-cta">Matricúlate</a></li>
+        </ul>
+        <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+
+    <div class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-grid"></div>
+        <div class="page-hero-content">
+            <div class="breadcrumb"><a href="index.html">Inicio</a><span class="sep">/</span><span class="current">Contacto</span></div>
+            <span class="page-tag">Estamos aquí para ti</span>
+            <h1 class="page-title">CONTÁCTANOS<br><em>HOY</em></h1>
+            <p class="page-subtitle">Primera consulta gratuita y sin compromiso. Te respondemos en menos de 24 horas. Sin rodeos, sin letra pequeña.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <!-- QUICK ACTIONS -->
+        <div class="quick-actions reveal">
+            <a href="tel:+34900000000" class="quick-action"><div class="qa-icon">📞</div><div class="qa-label">Llamar ahora</div><div class="qa-sub">+34 900 000 000</div></a>
+            <a href="https://wa.me/34600000000" class="quick-action" target="_blank"><div class="qa-icon">💬</div><div class="qa-label">WhatsApp</div><div class="qa-sub">Respuesta inmediata</div></a>
+            <a href="mailto:info@autoescuelaelite.es" class="quick-action"><div class="qa-icon">✉️</div><div class="qa-label">Email</div><div class="qa-sub">info@autoescuelaelite.es</div></a>
+        </div>
+
+        <div class="contact-layout">
+            <!-- INFO -->
+            <div class="reveal">
+                <span class="section-tag">Información de contacto</span>
+                <h3 class="contact-info-title">Todo lo que necesitas para encontrarnos</h3>
+                <p class="contact-info-desc">Visítanos en nuestra sede, llámanos o escríbenos. Estamos disponibles de lunes a sábado para cualquier consulta.</p>
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">Dirección</div>
+                            <div class="contact-item-value">Calle Principal 123</div>
+                            <div class="contact-item-sub">28001 Madrid, España</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">Teléfono</div>
+                            <div class="contact-item-value">+34 900 000 000</div>
+                            <div class="contact-item-sub">Llamada gratuita</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">WhatsApp</div>
+                            <div class="contact-item-value">+34 600 000 000</div>
+                            <div class="contact-item-sub">Respuesta en minutos</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">Email</div>
+                            <div class="contact-item-value">info@autoescuelaelite.es</div>
+                            <div class="contact-item-sub">Respuesta en menos de 24h</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-car"></i></div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">Circuito de maniobras</div>
+                            <div class="contact-item-value">Polígono Industrial Norte</div>
+                            <div class="contact-item-sub">Calle Industria 45, Madrid</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOURS -->
+                <div style="margin-top:40px">
+                    <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Horario de atención</div>
+                    <div class="hours-table">
+                        <div class="hours-row"><span class="hours-day">Lunes – Viernes</span><span class="hours-time">08:30 – 20:00 <span class="hours-badge">Abierto</span></span></div>
+                        <div class="hours-row"><span class="hours-day">Sábados</span><span class="hours-time">09:00 – 14:00 <span class="hours-badge">Abierto</span></span></div>
+                        <div class="hours-row"><span class="hours-day">Domingos</span><span class="hours-closed">Cerrado</span></div>
+                        <div class="hours-row"><span class="hours-day">Festivos</span><span class="hours-closed">Consultar</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM -->
+            <div class="reveal">
+                <div class="form-title">Envíanos un mensaje</div>
+                <div class="form-subtitle">Rellena el formulario y te contactamos en menos de 24 horas con toda la información.</div>
+
+                <div class="success-msg" id="successMsg"><i class="fas fa-check-circle"></i> ¡Mensaje enviado! Te contactamos muy pronto.</div>
+
+                <div class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Tu nombre" required></div>
+                        <div class="form-group"><label>Apellidos *</label><input type="text" placeholder="Tus apellidos" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Email *</label><input type="email" placeholder="tu@email.com" required></div>
+                        <div class="form-group"><label>Teléfono *</label><input type="tel" placeholder="+34 600 000 000" required></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Permiso de interés *</label>
+                        <select required>
+                            <option value="">— Selecciona un permiso —</option>
+                            <optgroup label="Coche">
+                                <option>Permiso B — Coche (Básico)</option>
+                                <option>Permiso B — Coche (Completo)</option>
+                                <option>Permiso B — Coche (Elite)</option>
+                            </optgroup>
+                            <optgroup label="Moto">
+                                <option>Permiso AM — Ciclomotor</option>
+                                <option>Permiso A1 — Moto ligera</option>
+                                <option>Permiso A2 — Moto media potencia</option>
+                                <option>Permiso A — Moto sin restricciones</option>
+                            </optgroup>
+                            <optgroup label="Profesional">
+                                <option>Permiso C — Camión</option>
+                                <option>CAP — Certificado de Aptitud Profesional</option>
+                            </optgroup>
+                            <optgroup label="Otros">
+                                <option>Curso intensivo (cualquier permiso)</option>
+                                <option>Consulta general / Más información</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cuándo quieres empezar?</label>
+                        <select>
+                            <option value="">— Selecciona una opción —</option>
+                            <option>Lo antes posible</option>
+                            <option>En las próximas 2 semanas</option>
+                            <option>Este mes</option>
+                            <option>En los próximos 3 meses</option>
+                            <option>Aún no lo sé</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cómo prefieres que te contactemos?</label>
+                        <select>
+                            <option>Por teléfono</option>
+                            <option>Por WhatsApp</option>
+                            <option>Por email</option>
+                            <option>Cualquiera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje o consulta</label>
+                        <textarea placeholder="Cuéntanos tu situación, dudas, o cualquier información que consideres relevante..."></textarea>
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="privacy" required>
+                        <label for="privacy">He leído y acepto la <a href="#">política de privacidad</a> y el tratamiento de mis datos personales para gestionar mi consulta.</label>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="submitForm()">
+                        Enviar consulta <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <p class="form-note">Tus datos están seguros. Nunca compartimos tu información con terceros. <a href="#">Política de privacidad</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP -->
+        <div class="map-section reveal">
+            <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px">Cómo llegar</div>
+            <h3 style="font-family:'DM Serif Display',serif;font-size:32px;margin-bottom:32px">Encuéntranos <em style="font-style:italic;color:#666">en el mapa</em></h3>
+            <div class="map-container">
+                <div class="map-overlay-grid"></div>
+                <div class="map-lines">
+                    <div class="map-line-h" style="top:30%"></div>
+                    <div class="map-line-h" style="top:60%"></div>
+                    <div class="map-line-v" style="left:25%"></div>
+                    <div class="map-line-v" style="left:75%"></div>
+                </div>
+                <div class="map-pin">📍</div>
+                <div class="map-placeholder">
+                    <br><br><br>
+                    <h3>AutoEscuela Elite</h3>
+                    <p>Calle Principal 123, 28001 Madrid</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn-primary" style="margin-top:20px;font-size:12px;padding:12px 24px">Abrir en Google Maps →</a>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px">
+                <div style="background:var(--gray);border:1px solid #1e1e1e;padding:20px;border-radius:4px;font-size:14px;color:#888"><strong style="color:var(--white);display:block;margin-bottom:4px">🚇 Metro</strong>Línea 2 – Banco de España (5 min andando)</div>
+                <div style="background:var(--gray);border:1px solid #1e1e1e;padding:20px;border-radius:4px;font-size:14px;color:#888"><strong style="color:var(--white);display:block;margin-bottom:4px">🚌 Autobús</strong>Líneas 14, 27, 45 – Parada Calle Mayor</div>
+                <div style="background:var(--gray);border:1px solid #1e1e1e;padding:20px;border-radius:4px;font-size:14px;color:#888"><strong style="color:var(--white);display:block;margin-bottom:4px">🅿️ Parking</strong>Parking público a 50m (Calle Secundaria)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="index.html" class="nav-logo">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
+            <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
+            <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul></div>
+            <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', e => { cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; setTimeout(()=>{ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';},80); });
+        const reveals = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); }),{threshold:0.1});
+        reveals.forEach(el=>obs.observe(el));
+        function toggleMenu(){ document.getElementById('navLinks').classList.toggle('open'); }
+        function submitForm() {
+            const form = document.getElementById('contactForm');
+            const success = document.getElementById('successMsg');
+            form.style.opacity = '0.5';
+            form.style.pointerEvents = 'none';
+            setTimeout(() => {
+                form.style.display = 'none';
+                success.classList.add('show');
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

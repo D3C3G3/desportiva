@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEscuela Elite — Inicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        /* HERO */
+        #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 60px; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(232,57,42,0.08) 0%, transparent 60%); }
+        .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
+        .hero-content { position: relative; z-index: 2; padding-top: 80px; }
+        .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(232,57,42,0.1); border: 1px solid rgba(232,57,42,0.3); color: var(--accent); padding: 6px 14px; border-radius: 2px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; animation: fadeUp 0.8s ease both; }
+        .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+        h1.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 8vw, 110px); line-height: 0.95; letter-spacing: 2px; animation: fadeUp 0.8s 0.1s ease both; }
+        h1.hero-title em { font-style: normal; -webkit-text-stroke: 1px var(--white); color: transparent; }
+        .hero-sub { font-size: 16px; color: #888; line-height: 1.7; max-width: 420px; margin: 24px 0 40px; font-weight: 300; animation: fadeUp 0.8s 0.2s ease both; }
+        .hero-btns { display: flex; gap: 16px; animation: fadeUp 0.8s 0.3s ease both; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid #1e1e1e; animation: fadeUp 0.8s 0.4s ease both; flex-wrap: wrap; }
+        .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--white); line-height: 1; }
+        .stat-num span { color: var(--accent); }
+        .stat-label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+        .hero-visual { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; padding-top: 80px; animation: fadeUp 1.2s 0.3s ease both; }
+        .hero-car-container { position: relative; width: 100%; max-width: 560px; }
+        .hero-card-visual { width: 100%; aspect-ratio: 16/10; background: linear-gradient(135deg, #1a1a1a, #111); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 100px; border: 1px solid #222; }
+        .hero-badge { position: absolute; bottom: -20px; left: 20px; background: var(--gray); border: 1px solid #2a2a2a; padding: 16px 20px; border-radius: 4px; display: flex; align-items: center; gap: 12px; }
+        .badge-icon { font-size: 24px; }
+        .badge-text { font-size: 12px; color: #888; }
+        .badge-text strong { display: block; color: var(--white); font-size: 14px; }
+        .hero-rating { position: absolute; top: 20px; right: -20px; background: var(--gray); border: 1px solid #2a2a2a; padding: 14px 18px; border-radius: 4px; font-size: 12px; }
+        .card-rating { display: flex; align-items: center; gap: 6px; color: var(--accent2); margin-bottom: 4px; }
+
+        /* FEATURES */
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+        .feature-card { background: var(--gray); padding: 36px; border: 1px solid #1a1a1a; transition: background 0.3s; }
+        .feature-card:hover { background: #202020; }
+        .feature-icon { width: 44px; height: 44px; background: rgba(232,57,42,0.1); border: 1px solid rgba(232,57,42,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); margin-bottom: 20px; }
+        .feature-title { font-size: 17px; font-weight: 600; margin-bottom: 10px; }
+        .feature-desc { font-size: 14px; color: #666; line-height: 1.6; }
+
+        /* CURSOS PREVIEW */
+        .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+        .course-card { background: var(--gray); padding: 40px 36px; position: relative; overflow: hidden; transition: all 0.4s; cursor: pointer; border: 1px solid #1a1a1a; }
+        .course-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+        .course-card:hover::before { transform: scaleX(1); }
+        .course-card:hover { background: #202020; transform: translateY(-4px); }
+        .course-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: #1e1e1e; position: absolute; top: 20px; right: 30px; line-height: 1; transition: color 0.4s; }
+        .course-card:hover .course-num { color: #2a2a2a; }
+        .course-icon { width: 48px; height: 48px; background: rgba(232,57,42,0.1); border: 1px solid rgba(232,57,42,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 24px; color: var(--accent); }
+        .course-name { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 12px; }
+        .course-desc { font-size: 14px; color: #777; line-height: 1.7; margin-bottom: 24px; }
+        .course-price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--accent); }
+        .course-price small { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #666; }
+        .course-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--accent); text-decoration: none; margin-top: 20px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; transition: gap 0.3s; }
+        .course-link:hover { gap: 14px; }
+
+        /* PROCESO PREVIEW */
+        .proceso-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .steps-list { display: flex; flex-direction: column; }
+        .step { display: flex; gap: 24px; padding: 28px 0; border-bottom: 1px solid #1a1a1a; transition: padding-left 0.3s; cursor: pointer; }
+        .step:hover { padding-left: 8px; }
+        .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #222; line-height: 1; min-width: 60px; transition: color 0.3s; }
+        .step:hover .step-num { color: var(--accent); }
+        .step h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+        .step p { font-size: 14px; color: #777; line-height: 1.6; }
+        .proceso-visual { background: var(--gray); border: 1px solid #222; border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; display: flex; flex-direction: column; justify-content: flex-end; padding: 36px; position: relative; }
+        .pv-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a1a1a, #0f0f0f); display: flex; align-items: center; justify-content: center; font-size: 120px; color: #1e1e1e; }
+        .pv-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9), transparent 50%); }
+        .pv-content { position: relative; z-index: 2; }
+        .pv-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; margin-bottom: 12px; }
+        .pv-content p { font-size: 14px; color: #888; }
+        .pv-tag { position: absolute; top: 24px; left: 24px; z-index: 2; background: var(--accent); color: #fff; padding: 6px 14px; border-radius: 2px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* TESTIMONIOS */
+        .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .testi-card { background: var(--gray); border: 1px solid #1e1e1e; padding: 32px; border-radius: 4px; transition: transform 0.3s; }
+        .testi-card:hover { transform: translateY(-4px); }
+        .testi-stars { color: var(--accent2); margin-bottom: 16px; font-size: 14px; }
+        .testi-text { font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.6; color: #ccc; margin-bottom: 24px; font-style: italic; }
+        .testi-author { display: flex; align-items: center; gap: 12px; }
+        .testi-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #fff; }
+        .testi-name { font-size: 14px; font-weight: 600; }
+        .testi-detail { font-size: 12px; color: #666; }
+
+        /* CTA */
+        #cta { padding: 100px 60px; background: var(--accent); position: relative; overflow: hidden; }
+        .cta-bg { position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .cta-content { position: relative; z-index: 2; text-align: center; max-width: 700px; margin: 0 auto; }
+        .cta-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); color: #fff; line-height: 1; margin-bottom: 24px; }
+        .cta-content p { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 40px; }
+        .cta-note { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 20px; }
+
+        @media (max-width: 1024px) {
+            #hero { grid-template-columns: 1fr; padding: 0 30px; text-align: center; }
+            .hero-visual { display: none; }
+            .hero-stats { justify-content: center; }
+            .hero-btns { justify-content: center; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .proceso-grid { grid-template-columns: 1fr; }
+            .proceso-visual { display: none; }
+            .testi-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            #cta { padding: 60px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <nav>
+        <a href="index.html" class="nav-logo">AUTO<span>ELITE</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="proceso.html">Cómo funciona</a></li>
+            <li><a href="instructores.html">Instructores</a></li>
+            <li><a href="testimonios.html">Opiniones</a></li>
+            <li><a href="contacto.html" class="nav-cta">Matricúlate</a></li>
+        </ul>
+        <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Autoescuela certificada DGT</div>
+            <h1 class="hero-title">CONDUCE<br>TU<br><em>FUTURO</em></h1>
+            <p class="hero-sub">Formación de conductores de élite. Clases teóricas y prácticas con los mejores instructores certificados. Tu carnet en el menor tiempo posible.</p>
+            <div class="hero-btns">
+                <a href="cursos.html" class="btn-primary">Ver Cursos</a>
+                <a href="contacto.html" class="btn-outline">Contactar</a>
+            </div>
+            <div class="hero-stats">
+                <div><div class="stat-num">98<span>%</span></div><div class="stat-label">Tasa de aprobados</div></div>
+                <div><div class="stat-num">12<span>K+</span></div><div class="stat-label">Alumnos formados</div></div>
+                <div><div class="stat-num">15<span>+</span></div><div class="stat-label">Años de experiencia</div></div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-car-container">
+                <div class="hero-card-visual">🚗</div>
+                <div class="hero-badge"><div class="badge-icon">🏆</div><div class="badge-text"><strong>Mejor Autoescuela 2024</strong>Premio DGT Excelencia</div></div>
+                <div class="hero-rating"><div class="card-rating">★★★★★ <span style="color:#666">4.9/5</span></div><div style="font-size:11px;color:#555">+1200 valoraciones</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-section"><div class="marquee-track"><span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span><span class="marquee-item">CLASES INTENSIVAS</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span><span class="marquee-item">CLASES INTENSIVAS</span><span class="marquee-dot">◆</span></div></div>
+
+    <!-- FEATURES -->
+    <section class="section">
+        <div class="section-header reveal">
+            <span class="section-tag">Por qué elegirnos</span>
+            <h2 class="section-title">Lo que nos hace <em>diferentes</em></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-graduation-cap"></i></div><div class="feature-title">98% de aprobados</div><div class="feature-desc">La tasa de éxito más alta de la región. Método probado con más de 12.000 alumnos.</div></div>
+            <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-clock"></i></div><div class="feature-title">Horarios flexibles</div><div class="feature-desc">Clases de lunes a sábado, mañana y tarde. Adapta la formación a tu ritmo de vida.</div></div>
+            <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-laptop"></i></div><div class="feature-title">Campus digital 24/7</div><div class="feature-desc">Accede a tests, vídeos y simulacros desde cualquier dispositivo, cuando quieras.</div></div>
+            <div class="feature-card reveal"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><div class="feature-title">Garantía de aprobado</div><div class="feature-desc">Si no apruebas en el primer intento, repetimos las clases necesarias sin coste adicional.</div></div>
+        </div>
+    </section>
+
+    <!-- CURSOS -->
+    <section class="section section-alt">
+        <div class="section-header-row reveal">
+            <div><span class="section-tag">Lo que ofrecemos</span><h2 class="section-title">Nuestros <em>cursos</em></h2></div>
+            <a href="cursos.html" class="btn-outline">Ver todos los cursos</a>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card reveal"><div class="course-num">01</div><div class="course-icon"><i class="fas fa-car"></i></div><div class="course-name">Permiso B — Coche</div><div class="course-desc">El carnet más demandado. Clases prácticas en ciudad y carretera con vehículos modernos.</div><div class="course-price">Desde 599€ <small>/ completo</small></div><a href="cursos.html" class="course-link">Más info <i class="fas fa-arrow-right"></i></a></div>
+            <div class="course-card reveal"><div class="course-num">02</div><div class="course-icon"><i class="fas fa-motorcycle"></i></div><div class="course-name">Permiso A — Moto</div><div class="course-desc">Desde A1 hasta A. Circuito propio de maniobras y formación especializada en seguridad.</div><div class="course-price">Desde 450€ <small>/ completo</small></div><a href="cursos.html" class="course-link">Más info <i class="fas fa-arrow-right"></i></a></div>
+            <div class="course-card reveal"><div class="course-num">03</div><div class="course-icon"><i class="fas fa-truck"></i></div><div class="course-name">Permiso C — Camión</div><div class="course-desc">Habilitación profesional para conducción de vehículos de gran tonelaje.</div><div class="course-price">Desde 799€ <small>/ completo</small></div><a href="cursos.html" class="course-link">Más info <i class="fas fa-arrow-right"></i></a></div>
+        </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="section">
+        <div class="proceso-grid">
+            <div>
+                <div class="section-header reveal"><span class="section-tag">Cómo funciona</span><h2 class="section-title">Tu camino al<br><em>carnet en 4 pasos</em></h2></div>
+                <div class="steps-list">
+                    <div class="step reveal"><div class="step-num">01</div><div><h3>Matrícula online</h3><p>Regístrate en menos de 5 minutos. Sin papeleos innecesarios.</p></div></div>
+                    <div class="step reveal"><div class="step-num">02</div><div><h3>Clases teóricas</h3><p>Campus digital 24/7 con tests, vídeos y simulacros de examen.</p></div></div>
+                    <div class="step reveal"><div class="step-num">03</div><div><h3>Clases prácticas</h3><p>Elige horario y vehículo. Instructores certificados se adaptan a ti.</p></div></div>
+                    <div class="step reveal"><div class="step-num">04</div><div><h3>¡A conducir!</h3><p>Gestionamos tu examen y te acompañamos hasta el final.</p></div></div>
+                </div>
+                <div style="margin-top:32px"><a href="proceso.html" class="btn-primary">Ver proceso completo</a></div>
+            </div>
+            <div class="proceso-visual reveal">
+                <div class="pv-bg"><i class="fas fa-road"></i></div>
+                <div class="pv-overlay"></div>
+                <div class="pv-tag">98% Aprobados</div>
+                <div class="pv-content"><h3>Método probado con resultados reales</h3><p>Más de 12.000 conductores formados en 15 años.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section section-alt">
+        <div class="section-header-row reveal">
+            <div><span class="section-tag">Opiniones reales</span><h2 class="section-title">Lo que dicen<br><em>nuestros alumnos</em></h2></div>
+            <div style="text-align:right"><div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--accent)">4.9</div><div style="color:var(--accent2);font-size:14px">★★★★★</div><div style="font-size:12px;color:#555;margin-top:4px">1.200+ reseñas</div></div>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-text">"Aprobé el teórico a la primera y el práctico al segundo. Instructores increíbles, muy pacientes."</div><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#e8392a,#ff6b5b)">ML</div><div><div class="testi-name">María López</div><div class="testi-detail">Permiso B · Marzo 2024</div></div></div></div>
+            <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-text">"El método de estudio online es excelente. Me adapté a mis horarios de trabajo perfectamente."</div><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">CG</div><div><div class="testi-name">Carlos García</div><div class="testi-detail">Permiso A2 · Enero 2024</div></div></div></div>
+            <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><div class="testi-text">"Después de suspender en otra autoescuela, aquí aprobé todo en tiempo récord. Recomendado al 100%."</div><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#f5a623,#e8392a)">AR</div><div><div class="testi-name">Ana Rodríguez</div><div class="testi-detail">Permiso B · Febrero 2024</div></div></div></div>
+        </div>
+        <div style="text-align:center;margin-top:48px"><a href="testimonios.html" class="btn-outline">Ver todas las opiniones</a></div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-bg"></div>
+        <div class="cta-content reveal">
+            <h2>¿LISTO PARA CONDUCIR?</h2>
+            <p>Únete a los más de 12.000 conductores que ya confiaron en nosotros.</p>
+            <a href="contacto.html" class="btn-white">Empezar ahora</a>
+            <p class="cta-note">Sin compromiso · Consulta gratuita · Respuesta en 24h</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="index.html" class="nav-logo">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
+            <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
+            <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+            <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        document.addEventListener('mousemove', e => { cursor.style.left=e.clientX+'px'; cursor.style.top=e.clientY+'px'; setTimeout(()=>{ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';},80); });
+        const reveals = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(entries => entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); }),{threshold:0.1});
+        reveals.forEach(el=>obs.observe(el));
+        function toggleMenu(){ document.getElementById('navLinks').classList.toggle('open'); }
+    </script>
+</body>
+</html>
