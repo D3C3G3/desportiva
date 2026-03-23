@@ -246,7 +246,8 @@ body.dark nav { background: #0a0b1a; box-shadow: 0 3px 24px rgba(0,0,0,0.5); }
 .page-hero {
     padding: 140px 60px 80px;
     position: relative; overflow: hidden;
-    background: linear-gradient(135deg, var(--blue) 0%, #1a00cc 100%);
+    background: #0000B2;
+    background: linear-gradient(90deg, rgba(0, 0, 178, 1) 0%, rgba(0, 0, 112, 1) 100%);
     border-bottom: 4px solid var(--yellow);
 }
 body.dark .page-hero { background: linear-gradient(135deg, #0a0b1a 0%, #0d0080 100%); }

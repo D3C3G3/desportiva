@@ -79,7 +79,6 @@
     <ul class="nav-links" id="navLinks">
         <li><a href="cursos.html" class="active">Cursos</a></li>
         <li><a href="proceso.html">Cómo funciona</a></li>
-        <li><a href="instructores.html">Instructores</a></li>
         <li><a href="testimonios.html">Opiniones</a></li>
         <li><a href="contacto.html" class="nav-cta">Matricúlate</a></li>
     </ul>
@@ -122,11 +121,7 @@
             ╚══════════════════════════════════════════╝
             -->
             <div class="ci-photo">
-                <div class="photo-placeholder" style="width:100%;height:100%;min-height:260px">
-                    <span class="ph-icon">🚗</span>
-                    <span class="ph-label">Foto Permiso B</span>
-                    <span class="ph-hint">Coche doble mando · 560×700px</span>
-                </div>
+<img src="images/cochevertical.jpg" alt="Permiso B - Vehículo turismo" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="ci-body">
                 <span class="ci-badge">Más popular</span>
@@ -158,20 +153,16 @@
         </div>
     </div>
 
-    <!-- PERMISO AM -->
+    <!-- PERMISO A1 -->
     <div class="course-item reveal" data-cat="moto">
         <div class="course-item-inner">
             <div class="ci-photo">
-                <div class="photo-placeholder" style="width:100%;height:100%;min-height:260px">
-                    <span class="ph-icon">🛵</span>
-                    <span class="ph-label">Foto Permiso AM</span>
-                    <span class="ph-hint">Ciclomotor · 560×700px</span>
-                </div>
+<img src="images/A1vertical.png" alt="Permiso A1 - Moto 125cc" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="ci-body">
-                <span class="ci-badge">Desde 15 años</span>
-                <div class="ci-permit">AM</div>
-                <div class="ci-title">Permiso AM — Ciclomotor</div>
+                <span class="ci-badge">Desde 16 años</span>
+                <div class="ci-permit">A1</div>
+                <div class="ci-title">Permiso A1 — Moto 125cc</div>
                 <div class="ci-desc">Permite conducir ciclomotores de 2 y 3 ruedas con velocidad máxima de 45 km/h. Ideal para jóvenes a partir de 15 años. El primer paso para la independencia.</div>
                 <div class="ci-features">
                     <div class="ci-feat"><i class="fas fa-check"></i>Desde los 15 años</div>
@@ -200,11 +191,7 @@
     <div class="course-item reveal" data-cat="moto">
         <div class="course-item-inner">
             <div class="ci-photo">
-                <div class="photo-placeholder" style="width:100%;height:100%;min-height:260px">
-                    <span class="ph-icon">🏍️</span>
-                    <span class="ph-label">Foto Permiso A2</span>
-                    <span class="ph-hint">Moto media · 560×700px</span>
-                </div>
+                <img src="images/A2vertical.jpg" alt="Permiso A2 - Moto media potencia" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="ci-body">
                 <span class="ci-badge">Más vendido moto</span>
@@ -240,11 +227,7 @@
     <div class="course-item reveal" data-cat="moto">
         <div class="course-item-inner">
             <div class="ci-photo">
-                <div class="photo-placeholder" style="width:100%;height:100%;min-height:260px">
-                    <span class="ph-icon">🏍️</span>
-                    <span class="ph-label">Foto Permiso A</span>
-                    <span class="ph-hint">Moto sin restricciones · 560×700px</span>
-                </div>
+<img src="images/Avertical.jpg" alt="Permiso A - Moto sin restricciones" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="ci-body">
                 <span class="ci-badge">Sin límite potencia</span>
@@ -278,11 +261,7 @@
     <div class="course-item reveal" data-cat="profesional">
         <div class="course-item-inner">
             <div class="ci-photo">
-                <div class="photo-placeholder" style="width:100%;height:100%;min-height:260px">
-                    <span class="ph-icon">🚛</span>
-                    <span class="ph-label">Foto Permiso C</span>
-                    <span class="ph-hint">Camión / vehículo pesado · 560×700px</span>
-                </div>
+            <img src="images/Cvertical.png" alt="Permiso C - Camión y vehículos pesados" style="width:100%;height:100%;object-fit:cover;display:block;">
             </div>
             <div class="ci-body">
                 <span class="ci-badge">Profesional</span>
@@ -406,6 +385,40 @@
 </footer>
 
 <script src="theme.js"></script>
+<script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    if (cursor && ring) {
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 80);
+        });
+    }
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Nav mobile
+    function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+
+    // FAQ accordion
+    function toggleFaq(el) { el.closest('.faq-item').classList.toggle('open'); }
+
+    // Filtro de cursos
+    function filterCourses(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.course-item').forEach(c => {
+            c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+        });
+    }
+</script>
 
 
 <!-- TOGGLE DARK/LIGHT — toggles.dev "Within" -->
@@ -455,5 +468,8 @@ document.addEventListener("DOMContentLoaded",function(){
   btn.addEventListener("click",function(){setTimeout(syncLabel,50);});
 });
 </script>
+
+
+
 </body>
 </html>
