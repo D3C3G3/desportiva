@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<script>if(localStorage.getItem('autoelite-theme')==='dark')document.documentElement.classList.add('dark');</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoEscuela Elite — Cursos y Permisos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+    /* FILTER */
+    .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:44px;}
+    .filter-btn{background:var(--white);border:2px solid var(--gray-border);color:var(--gray-mid);padding:7px 16px;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.25s;}
+    .filter-btn:hover,.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+    /* ── Sticky filter bar ── */
+    .filter-bar-sticky-wrap {
+        position: sticky;
+        top: 72px;
+        z-index: 500;
+        background: linear-gradient(to bottom, var(--bg) 60%, transparent 100%);
+        padding: 22px 0 28px;
+        margin-bottom: 36px;
+        border-bottom: none;
+        transition: box-shadow 0.3s;
+    }
+    .filter-bar-sticky-wrap.stuck {
+        box-shadow: 0 8px 28px rgba(0,0,178,0.07);
+    }
+    body.dark .filter-bar-sticky-wrap {
+        background: linear-gradient(to bottom, var(--bg) 60%, transparent 100%);
+    }
+    .filter-bar-sticky-wrap .filter-bar {
+        margin-bottom: 0;
+    }
+
+    /* COURSE CARD */
+    .course-item{background:var(--white);border:1px solid var(--gray-border);border-radius:8px;overflow:hidden;margin-bottom:20px;transition:all 0.3s;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+    .course-item:hover{box-shadow:0 12px 36px rgba(0,0,178,0.13);border-color:rgba(0,0,178,0.25);}
+    .course-item-inner{display:grid;grid-template-columns:280px 1fr 260px;}
+    .ci-photo{overflow:hidden;position:relative;}
+    .ci-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+    .ci-body{padding:36px 40px;border-left:1px solid var(--gray-border);border-right:1px solid var(--gray-border);}
+    .ci-permit{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--blue);line-height:1;margin-bottom:4px;}
+    .ci-title{font-family:'DM Serif Display',serif;font-size:24px;color:var(--blue);margin-bottom:12px;}
+    .ci-desc{font-size:14px;color:var(--gray-mid);line-height:1.7;margin-bottom:24px;}
+    .ci-features{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .ci-feat{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-text);}
+    .ci-feat i{color:var(--blue);font-size:11px;background:var(--yellow);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+    .ci-pricing{padding:36px 28px;display:flex;flex-direction:column;justify-content:space-between;background:var(--gray-light);}
+    .ci-price-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray-mid);margin-bottom:6px;font-weight:600;}
+    .ci-price{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--blue);line-height:1;}
+    .ci-price span{font-size:28px;color:var(--blue);}
+    .ci-price-note{font-size:12px;color:var(--gray-mid);margin-top:4px;}
+    .ci-duracion{margin:20px 0;display:flex;flex-direction:column;gap:8px;}
+    .ci-dur-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--gray-border);}
+    .ci-dur-row span:first-child{color:var(--gray-mid);}
+    .ci-dur-row span:last-child{font-weight:600;color:var(--blue);}
+    .ci-badge{background:var(--yellow);color:var(--blue);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:2px;display:inline-block;margin-bottom:12px;}
+
+    /* PACKS */
+    .packs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .pack{background:var(--white);border:2px solid var(--gray-border);border-radius:8px;padding:36px 28px;position:relative;transition:all 0.3s;}
+    .pack:hover{border-color:var(--blue);box-shadow:0 12px 32px rgba(0,0,178,0.1);transform:translateY(-4px);}
+    .pack.featured{border-color:var(--blue);background:linear-gradient(to bottom,#f0f0ff,var(--white));}
+    .pack-popular{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--yellow);color:var(--blue);padding:4px 18px;border-radius:2px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;white-space:nowrap;}
+    .pack-name{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--blue);letter-spacing:2px;margin-bottom:8px;}
+    .pack-desc{font-size:14px;color:var(--gray-mid);margin-bottom:20px;}
+    .pack-price{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--blue);}
+    .pack-price small{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--gray-mid);}
+    .pack-divider{height:2px;background:var(--gray-border);margin:20px 0;}
+    .pack-feats{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;}
+    .pack-feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray-text);}
+    .pack-feat i{color:var(--blue);width:18px;text-align:center;}
+    .pack-feat.off{color:var(--gray-border);}
+    .pack-feat.off i{color:var(--gray-border);}
+
+    /* FAQ */
+    .faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+    @media(max-width:1024px){
+        .course-item-inner{grid-template-columns:1fr;}
+        .ci-photo{aspect-ratio:16/9;}
+        .ci-body{border-left:none;border-right:none;border-top:1px solid var(--gray-border);}
+        .ci-pricing{border-top:1px solid var(--gray-border);}
+        .ci-features{grid-template-columns:1fr;}
+        .packs-grid{grid-template-columns:1fr;}
+        .faq-cols{grid-template-columns:1fr;}
+    }
+
+   /* ══════════════════════════════════════════
+   CALCULADORA ELITE - VERSIÓN CORREGIDA
+   ══════════════════════════════════════════ */
+.calc-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: 30px;
+    display: flex; /* Cambiado a flex para mejor control */
+    flex-wrap: wrap;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,178,0.08);
+}
+
+.calc-settings { 
+    flex: 1;
+    min-width: 300px;
+    padding: 50px; 
+    background: #fafaff; 
+}
+
+.calc-result { 
+    flex: 0 0 350px;
+    background: var(--blue); 
+    color: #fff; 
+    padding: 50px 40px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+}
+
+.calc-group { margin-bottom: 35px; }
+
+.calc-label { 
+    display: block; 
+    font-family: 'Bebas Neue', sans-serif; 
+    font-size: 22px; 
+    letter-spacing: 1.5px; 
+    color: var(--blue); 
+    margin-bottom: 15px; 
+    text-transform: uppercase;
+}
+
+/* SELECT ESTILO CÁPSULA */
+.calc-select { 
+    width: 100%; 
+    padding: 16px 25px; 
+    border: 2px solid var(--gray-border); 
+    border-radius: 50px; 
+    font-family: 'DM Sans', sans-serif; 
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue);
+    background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230000B2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 20px center;
+    background-size: 18px;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    outline: none;
+}
+
+/* SLIDER MEJORADO */
+.calc-range-wrapper { display: flex; align-items: center; gap: 20px; }
+.calc-range { 
+    flex: 1; 
+    -webkit-appearance: none;
+    height: 10px;
+    background: var(--gray-border);
+    border-radius: 10px;
+    background-image: linear-gradient(var(--blue), var(--blue));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.calc-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px; width: 24px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--blue);
+    box-shadow: 0 4px 10px rgba(0,0,178,0.2);
+}
+
+.calc-range-val { 
+    font-family: 'Bebas Neue', sans-serif; 
+    font-size: 28px; 
+    color: var(--blue); 
+    background: var(--yellow); 
+    padding: 2px 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0px var(--blue);
+}
+
+/* CHECKBOXES */
+.calc-check { 
+    display: flex; align-items: center; gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    padding: 12px 20px;
+    border-radius: 50px; 
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 500;
+}
+.calc-check:hover { border-color: var(--blue); background: #f0f3ff; }
+
+/* RESULTADO */
+.result-price { 
+    font-family: 'Bebas Neue', sans-serif; 
+    font-size: 90px; 
+    color: var(--yellow); 
+    line-height: 1;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .calc-container { margin: 20px; border-radius: 20px; }
+    .calc-result { flex: 1 1 100%; }
+}
+    /* MENÚ DESPLEGABLE (SELECT) ESTILO CÁPSULA */
+    .calc-select { 
+        width: 100%; 
+        padding: 16px 25px; 
+        border: 2px solid var(--gray-border); 
+        border-radius: 50px; /* Redondeado total */
+        font-family: 'DM Sans', sans-serif; 
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--blue);
+        background-color: var(--white);
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230000B2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 20px center;
+        background-size: 18px;
+        transition: all 0.3s;
+        outline: none;
+    }
+    .calc-select:hover { border-color: var(--blue); transform: translateY(-1px); }
+
+    /* SLIDER MEJORADO */
+    .calc-range-wrapper { display: flex; align-items: center; gap: 20px; }
+    
+    .calc-range { 
+        -webkit-appearance: none;
+        flex: 1; 
+        height: 10px;
+        background: var(--gray-border);
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+        /* Gradiente dinámico para progreso */
+        background-image: linear-gradient(var(--blue), var(--blue));
+        background-size: 0% 100%;
+        background-repeat: no-repeat;
+    }
+
+    /* Tirador del slider */
+    .calc-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 3px solid var(--blue);
+        box-shadow: 0 4px 10px rgba(0,0,178,0.2);
+        transition: 0.2s ease-in-out;
+    }
+    .calc-range::-webkit-slider-thumb:hover { transform: scale(1.2); background: var(--yellow); }
+
+    .calc-range-val { 
+        font-family: 'Bebas Neue', sans-serif; 
+        font-size: 28px; 
+        color: var(--blue); 
+        background: var(--yellow); 
+        padding: 2px 14px;
+        border-radius: 10px;
+        min-width: 45px;
+        text-align: center;
+        box-shadow: 3px 3px 0px var(--blue);
+    }
+
+    /* CHECKBOXES TIPO CÁPSULA */
+    .calc-check { 
+        font-size: 14px; 
+        color: var(--gray-text); 
+        cursor: pointer; 
+        display: flex; 
+        align-items: center; 
+        gap: 12px;
+        background: var(--white);
+        border: 1px solid var(--gray-border);
+        padding: 14px 20px;
+        border-radius: 50px; 
+        transition: all 0.3s;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+    .calc-check:hover { background: #eef2ff; border-color: var(--blue); color: var(--blue); }
+    .calc-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); }
+
+    /* CAJA DE RESULTADO */
+    .result-price { 
+        font-family: 'Bebas Neue', sans-serif; 
+        font-size: 90px; 
+        line-height: 1; 
+        margin: 15px 0; 
+        color: var(--yellow); /* Contraste Elite */
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+    .result-note { font-size: 11px; opacity: 0.7; margin-bottom: 25px; max-width: 240px; text-align: center; line-height: 1.4; }
+
+    /* Botón de matrícula redondeado */
+    .calc-result .btn-primary {
+        border-radius: 50px;
+        background: var(--yellow);
+        color: var(--blue);
+        border: none;
+        width: 100%;
+        justify-content: center;
+        font-weight: 800;
+    }
+
+    @media (max-width: 768px) {
+        .calc-container { grid-template-columns: 1fr; border-radius: 20px; margin: 20px; }
+        .calc-settings { padding: 30px; }
+    }
+
+    /* Chrome, Edge, Safari */
+.calc-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    background: #ffffff; /* ⚪ blanco */
+    border: 2px solid #142ED5; /* opcional (tu azul) */
+
+    cursor: pointer;
+}
+
+/* Firefox */
+.calc-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    background: #ffffff; /* ⚪ blanco */
+    border: 2px solid #142ED5;
+
+    cursor: pointer;
+}
+
+.calc-range::-webkit-slider-thumb {
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.calc-range::-moz-range-thumb {
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Antes tenías algo así: */
+.section-alt {
+    padding-left: 60px;  
+    padding-right: 60px;
+}
+
+/* Para móvil/tablet */
+@media (max-width: 1024px) {
+    .section-alt {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+</style>
+    <link rel="shortcut icon" href="images/adesportiva.png" type="image/x-icon">
+
+</head>
+<body>
+
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<a href="https://wa.me/34600000000" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+
+<!-- Overlay oscuro -->
+<div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+
+<!-- Panel menú (fuera del nav para quedar sobre el overlay) -->
+<ul class="nav-links" id="navLinks">
+    <li><a href="cursos.html">Cursos</a></li>
+    <li><a href="proceso.html">Cómo funciona</a></li>
+    <li><a href="testimonios.html">Opiniones</a></li>
+    <li><a href="contacto.html" class="btn-matricula">Matricularse</a></li>
+    <div class="nav-footer-info">AutoEscuela Elite · Desde 2009</div>
+</ul>
+
+<nav>
+    <a href="index.html" class="nav-logo"><img style="height: 44px; width: auto;" src="images/adesportiva.png" alt=""></a>
+    <button class="nav-toggle" onclick="toggleMenu(event)" aria-label="Menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+</nav>
+
+<div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-content">
+        <span class="page-tag">Todos los permisos</span>
+        <h1 class="page-title">CURSOS &<br><em>PERMISOS</em></h1>
+        <p class="page-subtitle">Desde el Carnet B hasta el permiso para camiones. Formación completa, flexible y adaptada a ti.</p>
+    </div>
+</div>
+
+<div class="marquee-section"><div class="marquee-track"><span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span><span class="marquee-item">INTENSIVO</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span><span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span><span class="marquee-item">INTENSIVO</span><span class="marquee-dot">◆</span></div></div>
+
+<section class="section">
+    <div class="section-header reveal">
+        <span class="section-tag">Formación completa</span>
+        <h2 class="section-title">Todos nuestros <em>permisos</em></h2>
+        <div class="section-divider"></div>
+    </div>
+    <div class="filter-bar-sticky-wrap" id="filterSticky">
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCourses('all',this)">Todos</button>
+            <button class="filter-btn" onclick="filterCourses('coche',this)">Coche</button>
+            <button class="filter-btn" onclick="filterCourses('moto',this)">Moto</button>
+            <button class="filter-btn" onclick="filterCourses('profesional',this)">Profesional</button>
+        </div>
+    </div>
+
+    <!-- PERMISO B -->
+    <div class="course-item reveal" data-cat="coche">
+        <div class="course-item-inner">
+            <!--
+            ╔══════════════════════════════════════════╗
+            ║  📸  FOTO PERMISO B                      ║
+            ║  Idea: coche de doble mando en ciudad    ║
+            ║  Para activar: <img src="coche-b.jpg">   ║
+            ╚══════════════════════════════════════════╝
+            -->
+            <div class="ci-photo">
+<img src="images/cochevertical.jpg" alt="Permiso B - Vehículo turismo" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="ci-body">
+                <span class="ci-badge">Más popular</span>
+                <div class="ci-permit">B</div>
+                <div class="ci-title">Permiso B — Vehículo Turismos</div>
+                <div class="ci-desc">El carnet de coche más común. Autoriza a conducir vehículos de hasta 3.500 kg y con hasta 8 plazas. Imprescindible para la vida diaria y para acceder a muchas oportunidades laborales.</div>
+                <div class="ci-features">
+                    <div class="ci-feat"><i class="fas fa-check"></i>Teoría online + presencial</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>20 clases prácticas incluidas</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Vehículos modernos 2022-2024</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Simulacros examen DGT</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Examen gestionado por nosotros</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Garantía de aprobado</div>
+                </div>
+            </div>
+            <div class="ci-pricing">
+                <div>
+                    <div class="ci-price-label">Desde</div>
+                    <div class="ci-price"><span>€</span>599</div>
+                    <div class="ci-price-note">Pack completo. Clase extra: 30€/ud</div>
+                </div>
+                <div class="ci-duracion">
+                    <div class="ci-dur-row"><span>Duración media</span><span>3–4 meses</span></div>
+                    <div class="ci-dur-row"><span>Horas prácticas</span><span>20 incluidas</span></div>
+                    <div class="ci-dur-row"><span>Intensivo</span><span>✓ Disponible</span></div>
+                </div>
+                <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Matricularme</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERMISO A1 -->
+    <div class="course-item reveal" data-cat="moto">
+        <div class="course-item-inner">
+            <div class="ci-photo">
+<img src="images/A1vertical.png" alt="Permiso A1 - Moto 125cc" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="ci-body">
+                <span class="ci-badge">Desde 16 años</span>
+                <div class="ci-permit">A1</div>
+                <div class="ci-title">Permiso A1 — Moto 125cc</div>
+                <div class="ci-desc">Permite conducir ciclomotores de 2 y 3 ruedas con velocidad máxima de 45 km/h. Ideal para jóvenes a partir de 15 años. El primer paso para la independencia.</div>
+                <div class="ci-features">
+                    <div class="ci-feat"><i class="fas fa-check"></i>Desde los 15 años</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Teoría online completa</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Prácticas en circuito seguro</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Equipamiento de seguridad</div>
+                </div>
+            </div>
+            <div class="ci-pricing">
+                <div>
+                    <div class="ci-price-label">Desde</div>
+                    <div class="ci-price"><span>€</span>250</div>
+                    <div class="ci-price-note">Pack completo. Todo incluido.</div>
+                </div>
+                <div class="ci-duracion">
+                    <div class="ci-dur-row"><span>Duración media</span><span>1–2 meses</span></div>
+                    <div class="ci-dur-row"><span>Edad mínima</span><span>15 años</span></div>
+                    <div class="ci-dur-row"><span>Intensivo</span><span>✓ Disponible</span></div>
+                </div>
+                <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Matricularme</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERMISO A2 -->
+    <div class="course-item reveal" data-cat="moto">
+        <div class="course-item-inner">
+            <div class="ci-photo">
+                <img src="images/A2vertical.jpg" alt="Permiso A2 - Moto media potencia" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="ci-body">
+                <span class="ci-badge">Más vendido moto</span>
+                <div class="ci-permit">A2</div>
+                <div class="ci-title">Permiso A2 — Moto media potencia</div>
+                <div class="ci-desc">Para motocicletas de hasta 35 kW. El permiso más popular entre los motoristas. Acceso a una amplia gama de motos deportivas y naked de alta gama. Circuito de maniobras propio.</div>
+                <div class="ci-features">
+                    <div class="ci-feat"><i class="fas fa-check"></i>Desde los 18 años</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Circuito de maniobras propio</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Upgrade desde A1 disponible</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Motos de alta gama</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Formación en carretera</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Garantía de aprobado</div>
+                </div>
+            </div>
+            <div class="ci-pricing">
+                <div>
+                    <div class="ci-price-label">Desde</div>
+                    <div class="ci-price"><span>€</span>450</div>
+                    <div class="ci-price-note">Pack completo. Upgrade A1→A2: 220€</div>
+                </div>
+                <div class="ci-duracion">
+                    <div class="ci-dur-row"><span>Duración media</span><span>2–3 meses</span></div>
+                    <div class="ci-dur-row"><span>Prácticas incluidas</span><span>18 clases</span></div>
+                    <div class="ci-dur-row"><span>Intensivo</span><span>✓ Disponible</span></div>
+                </div>
+                <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Matricularme</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERMISO A -->
+    <div class="course-item reveal" data-cat="moto">
+        <div class="course-item-inner">
+            <div class="ci-photo">
+<img src="images/Avertical.jpg" alt="Permiso A - Moto sin restricciones" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="ci-body">
+                <span class="ci-badge">Sin límite potencia</span>
+                <div class="ci-permit">A</div>
+                <div class="ci-title">Permiso A — Moto sin restricciones</div>
+                <div class="ci-desc">Sin límite de potencia. El permiso definitivo para motoristas. Formación avanzada en técnica de conducción. Acceso desde 24 años o 20 con 2 años de A2.</div>
+                <div class="ci-features">
+                    <div class="ci-feat"><i class="fas fa-check"></i>Sin restricción de potencia</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Upgrade A2→A disponible</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Técnica avanzada conducción</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Motos superbike disponibles</div>
+                </div>
+            </div>
+            <div class="ci-pricing">
+                <div>
+                    <div class="ci-price-label">Desde</div>
+                    <div class="ci-price"><span>€</span>550</div>
+                    <div class="ci-price-note">Pack completo. Upgrade A2→A: 280€</div>
+                </div>
+                <div class="ci-duracion">
+                    <div class="ci-dur-row"><span>Duración media</span><span>2–3 meses</span></div>
+                    <div class="ci-dur-row"><span>Edad mínima</span><span>24 años (20 con A2)</span></div>
+                    <div class="ci-dur-row"><span>Intensivo</span><span>✓ Disponible</span></div>
+                </div>
+                <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Matricularme</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERMISO C -->
+    <div class="course-item reveal" data-cat="profesional">
+        <div class="course-item-inner">
+            <div class="ci-photo">
+            <img src="images/Cvertical.png" alt="Permiso C - Camión y vehículos pesados" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="ci-body">
+                <span class="ci-badge">Profesional</span>
+                <div class="ci-permit">C</div>
+                <div class="ci-title">Permiso C — Camión y vehículos pesados</div>
+                <div class="ci-desc">Para vehículos de más de 3.500 kg. Abre puertas al sector logístico y del transporte. Formación profesional completa con posibilidad de añadir el CAP y acceso a bolsa de empleo.</div>
+                <div class="ci-features">
+                    <div class="ci-feat"><i class="fas fa-check"></i>Requiere Permiso B previo</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Flota de camiones moderna</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>CAP opcional (+200€)</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Bolsa de empleo incluida</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Formación en vías reales</div>
+                    <div class="ci-feat"><i class="fas fa-check"></i>Instructores expertos</div>
+                </div>
+            </div>
+            <div class="ci-pricing">
+                <div>
+                    <div class="ci-price-label">Desde</div>
+                    <div class="ci-price"><span>€</span>799</div>
+                    <div class="ci-price-note">Pack completo. CAP opcional.</div>
+                </div>
+                <div class="ci-duracion">
+                    <div class="ci-dur-row"><span>Duración media</span><span>3–5 meses</span></div>
+                    <div class="ci-dur-row"><span>Prácticas incluidas</span><span>25 clases</span></div>
+                    <div class="ci-dur-row"><span>Bolsa empleo</span><span>✓ Incluida</span></div>
+                </div>
+                <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Matricularme</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PACKS -->
+<section class="section section-alt">
+    <div class="section-header reveal">
+        <span class="section-tag">Elige tu plan</span>
+        <h2 class="section-title">Packs <em>y precios</em> — Permiso B</h2>
+        <div class="section-divider"></div>
+        <p class="section-subtitle">Elige el pack que mejor se adapte a tus necesidades. Sin letra pequeña.</p>
+    </div>
+    <div class="packs-grid">
+        <div class="pack reveal">
+            <div class="pack-name">BÁSICO</div>
+            <div class="pack-desc">Para quien tiene tiempo libre o experiencia previa.</div>
+            <div class="pack-price">399€ <small>/ único pago</small></div>
+            <div class="pack-divider"></div>
+            <div class="pack-feats">
+                <div class="pack-feat"><i class="fas fa-check"></i>Matrícula DGT incluida</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Campus teórico online</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>10 clases prácticas</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>1 intento de examen</div>
+                <div class="pack-feat off"><i class="fas fa-times"></i>Exámenes ilimitados</div>
+                <div class="pack-feat off"><i class="fas fa-times"></i>Garantía de aprobado</div>
+            </div>
+            <a href="contacto.html" class="btn-outline" style="text-align:center;width:100%">Empezar</a>
+        </div>
+        <div class="pack featured reveal">
+            <div class="pack-popular">Más popular</div>
+            <div class="pack-name">COMPLETO</div>
+            <div class="pack-desc">El más elegido. Formación íntegra sin sorpresas.</div>
+            <div class="pack-price">599€ <small>/ único pago</small></div>
+            <div class="pack-divider"></div>
+            <div class="pack-feats">
+                <div class="pack-feat"><i class="fas fa-check"></i>Matrícula DGT incluida</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Campus teórico online</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>20 clases prácticas</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>2 intentos de examen</div>
+                <div class="pack-feat off"><i class="fas fa-times"></i>Exámenes ilimitados</div>
+                <div class="pack-feat off"><i class="fas fa-times"></i>Garantía de aprobado</div>
+            </div>
+            <a href="contacto.html" class="btn-primary" style="text-align:center;width:100%">Empezar</a>
+        </div>
+        <div class="pack reveal">
+            <div class="pack-name">ELITE</div>
+            <div class="pack-desc">Premium sin límites. Sin preocupaciones.</div>
+            <div class="pack-price">799€ <small>/ único pago</small></div>
+            <div class="pack-divider"></div>
+            <div class="pack-feats">
+                <div class="pack-feat"><i class="fas fa-check"></i>Matrícula DGT incluida</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Campus teórico online</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Clases ilimitadas</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Exámenes ilimitados</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Garantía de aprobado</div>
+                <div class="pack-feat"><i class="fas fa-check"></i>Instructor personal fijo</div>
+            </div>
+            <a href="contacto.html" class="btn-outline" style="text-align:center;width:100%">Empezar</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- CALCULADORA -->
+<section class="section section-alt">
+    <div class="section-header reveal">
+        <span class="section-tag">Calculadora</span>
+        <h2 class="section-title">Presupuesto <em>Personalizado</em></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="calc-container">
+        <div class="calc-settings">
+            <div class="calc-group">
+                <label class="calc-label">1. Elige tu Pack</label>
+                <select id="calcPack" class="calc-select" onchange="updateCalc()">
+                    <option value="399">Pack Básico (399€)</option>
+                    <option value="599" selected>Pack Completo (599€)</option>
+                    <option value="799">Pack Elite (799€)</option>
+                </select>
+            </div>
+
+            <div class="calc-group">
+                <label class="calc-label">2. Clases Extra</label>
+                <div class="calc-range-wrapper">
+                    <input type="range" id="calcClases" min="0" max="40" value="0" class="calc-range" oninput="updateCalc()">
+                    <span id="clasesVal" class="calc-range-val">0</span>
+                </div>
+            </div>
+
+            <div class="calc-group" style="margin-bottom:0;">
+                <label class="calc-label">3. Extras</label>
+                <label class="calc-check"><input type="checkbox" id="calcCap" onchange="updateCalc()"> Curso CAP (+200€)</label>
+                <label class="calc-check"><input type="checkbox" id="calcIntensivo" onchange="updateCalc()"> Curso Intensivo (+50€)</label>
+            </div>
+        </div>
+
+        <div class="calc-result">
+            <span style="text-transform:uppercase; letter-spacing:2px; font-size:12px; opacity:0.8;">Total Estimado</span>
+            <div class="result-price"><span id="totalPrice">599</span>€</div>
+            <p style="font-size:11px; opacity:0.7; margin-bottom:30px;">*No incluye tasas de tráfico.</p>
+            <a href="contacto.html" class="btn-primary" style="background:var(--yellow); color:var(--blue); border:none; width:100%; text-align:center;">¡Empezar ya!</a>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+    <div class="section-header reveal">
+        <span class="section-tag">Preguntas frecuentes</span>
+        <h2 class="section-title">¿Tienes <em>dudas?</em></h2>
+        <div class="section-divider"></div>
+    </div>
+    <div class="faq-cols">
+        <div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Cuánto tiempo se tarda en sacar el carnet?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">La media es 3–4 meses, aunque con cursos intensivos se puede conseguir en 4–6 semanas.</div></div></div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué incluye el pack completo?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">Matrícula DGT, campus virtual ilimitado, 20 clases prácticas, gestión de 2 exámenes y soporte WhatsApp con tu instructor.</div></div></div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo cambiar de horario?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">Sí, con 24h de preaviso puedes cambiar cualquier clase sin coste adicional.</div></div></div>
+        </div>
+        <div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Qué pasa si suspendo el examen?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">Depende del pack. Con el Elite, reintentos ilimitados sin coste. En otros packs, 30€/clase extra y 60€ gestión nuevo examen.</div></div></div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Ofrecéis financiación?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">Sí, financiación sin intereses hasta en 12 mensualidades. También efectivo, tarjeta y transferencia.</div></div></div>
+            <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo hacer el curso intensivo?</span><i class="fas fa-plus"></i></div><div class="faq-a"><div class="faq-a-inner">Sí. Con clases diarias de teoría y práctica, muchos alumnos obtienen el carnet en 4–6 semanas.</div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="nav-logo" style="display:inline-block;margin-bottom:4px">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
+        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+</footer>
+
+<script src="theme.js"></script>
+<script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    if (cursor && ring) {
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => { ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }, 80);
+        });
+    }
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Nav mobile
+
+    // FAQ accordion
+    function toggleFaq(el) {
+        var item = el.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        // Cerrar todas
+        document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
+        // Si no estaba abierta, abrirla
+        if (!isOpen) item.classList.add('open');
+    }
+
+// Filtro de cursos
+function filterCourses(cat, btn) {
+    // 1. Quitar la clase 'active' de todos los botones y ponerla en el clicado
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // 2. Mostrar u ocultar los cursos según la categoría
+    document.querySelectorAll('.course-item').forEach(c => {
+        if (cat === 'all' || c.dataset.cat === cat) {
+            c.style.display = 'block';
+            // Opcional: añadir una pequeña animación de entrada
+            c.style.opacity = '0';
+            setTimeout(() => {
+                c.style.opacity = '1';
+                c.style.transition = 'opacity 0.3s ease';
+            }, 10);
+        } else {
+            c.style.display = 'none';
+        }
+    });
+}
+</script>
+
+
+<script>
+// Sync label text with current state
+document.addEventListener("DOMContentLoaded",function(){
+  var btn=document.getElementById("themeToggle");
+  var lbl=document.getElementById("themeLabel");
+  if(!btn||!lbl)return;
+  function syncLabel(){lbl.textContent=document.body.classList.contains("dark")?"Modo claro":"Modo oscuro";}
+  syncLabel();
+  btn.addEventListener("click",function(){setTimeout(syncLabel,50);});
+});
+
+
+function updateCalc() {
+    const packPrice = parseInt(document.getElementById('calcPack').value);
+    const slider = document.getElementById('calcClases');
+    const numClases = parseInt(slider.value);
+    
+    // --- EFECTO VISUAL DEL SLIDER ---
+    // Calcula el porcentaje para llenar la barra de azul
+    const min = slider.min || 0;
+    const max = slider.max || 40;
+    const percentage = ((numClases - min) / (max - min)) * 100;
+    slider.style.backgroundSize = percentage + '% 100%';
+    // --------------------------------
+
+    const clasesExtraCost = numClases * 30;
+    
+    let extras = 0;
+    if(document.getElementById('calcCap').checked) extras += 200;
+    if(document.getElementById('calcIntensivo').checked) extras += 50;
+
+    const totalFinal = packPrice + clasesExtraCost + extras;
+    const precioElemento = document.getElementById('totalPrice');
+
+    // Animación de conteo (la que ya teníamos)
+    let inicio = parseInt(precioElemento.innerText) || 0;
+    let totalActual = totalFinal;
+    precioElemento.innerText = totalActual; // Actualización directa para mayor fluidez al mover el slider
+
+    document.getElementById('clasesVal').innerText = numClases;
+}
+
+// Ejecutar una vez al cargar para que la barra se pinte correctamente
+document.addEventListener('DOMContentLoaded', updateCalc);
+
+</script>
+
+
+
+</body>
+</html>
