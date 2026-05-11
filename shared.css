@@ -5,13 +5,14 @@
     ══════════════════════════════════════════ */
     :root {
         /* Marca */
-        --blue:          #0000B2;
-        --blue-dark:     #00008a;
-        --blue-light:    #e8eaf8;
-        --blue-lighter:  #f0f1fc;
-        --yellow:        #FFDD00;       /* un toque más cálido que puro #FFFF00 */
-        --yellow-hover:  #e6cc00;
-        --yellow-light:  #fffbe6;
+        --blue:          #004f9d;       /* Azul del nuevo logo */
+        --blue-dark:     #05396a;       /* Azul oscuro del nuevo logo */
+        --blue-light:    #e6f0f9;
+        --blue-lighter:  #f0f7fd;
+        --yellow:        #df8e02;       /* Naranja/Amarillo del nuevo logo */
+        --yellow-hover:  #c67e02;
+        --yellow-light:  #fff4e6;
+        --accent:        #00afbf;       /* Cyan del nuevo logo */
 
         /* Superficies — MODO CLARO */
         --bg:            #f7f8fc;       /* fondo principal: ligeramente azulado */
@@ -754,6 +755,7 @@ nav.menu-abierto .nav-logo { color: #fff !important; }
         background: linear-gradient(135deg, var(--blue) 0%, #1a00cc 100%);
         color: #fff; padding: 64px 60px 30px;
         border-top: 4px solid var(--yellow);
+        overflow-x: hidden;
     }
     body.dark footer { background: linear-gradient(135deg, #0a0b1a 0%, #0d0080 100%); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
@@ -810,6 +812,33 @@ nav.menu-abierto .nav-logo { color: #fff !important; }
         .page-hero { padding: 120px 30px 60px; }
         .section { padding: 60px 30px; }
         .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+        footer {
+            padding: 40px 20px 30px;
+        }
+        .footer-grid { 
+            grid-template-columns: 1fr; 
+            gap: 30px; 
+            text-align: center;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-brand p {
+            margin: 14px auto;
+        }
+        .footer-social {
+            justify-content: center;
+        }
+        .footer-bottom {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
     }
 
 
