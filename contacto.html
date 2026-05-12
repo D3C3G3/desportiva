@@ -12,8 +12,8 @@
         .quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px;}
         .qa{background:var(--blue);border:2px solid var(--blue);border-radius:12px;padding:24px;text-align:center;text-decoration:none;color:#fff;transition:all 0.3s;}
         .qa:hover{background:var(--blue-dark);transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,178,0.25);}
-        .qa.yellow{background:var(--yellow);border-color:var(--yellow);color:var(--blue);}
-        .qa.yellow:hover{background:var(--yellow-hover);box-shadow:0 12px 28px rgba(255,221,0,0.4);}
+        .qa.accent{background:var(--accent);border-color:var(--accent);color:#fff;}
+        .qa.accent:hover{background:var(--accent-hover);box-shadow:0 12px 28px rgba(0,175,191,0.4);}
         .qa-icon{font-size:28px;margin-bottom:10px;}
         .qa-label{font-size:14px;font-weight:700;margin-bottom:4px;}
         .qa-sub{font-size:12px;opacity:0.7;}
@@ -26,20 +26,20 @@
         .c-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--border);transition:padding-left 0.3s;}
         .c-item:first-child{padding-top:0;}
         .c-item:hover{padding-left:6px;}
-        .c-item-icon{width:48px;height:48px;min-width:48px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--yellow);font-size:18px;flex-shrink:0;}
+        .c-item-icon{width:48px;height:48px;min-width:48px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:18px;flex-shrink:0;}
         .c-item-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px;font-weight:700;}
         .c-item-value{font-size:15px;color:var(--text);font-weight:600;transition:color var(--t);}
         .c-item-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
 
         .hours-box{margin-top:32px;background:linear-gradient(135deg,var(--blue) 0%,#1a00cc 100%);border-radius:12px;padding:28px;}
         body.dark .hours-box{background:linear-gradient(135deg,#0a0b1a 0%,#0d0080 100%);}
-        .hours-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);font-weight:700;margin-bottom:16px;}
+        .hours-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px;}
         .hours-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:14px;}
         .hours-row:last-child{border-bottom:none;}
         .hours-day{color:rgba(255,255,255,0.7);}
         .hours-time{color:#fff;font-weight:600;}
         .hours-closed{color:rgba(255,255,255,0.3);}
-        .hours-badge{background:var(--yellow);color:var(--blue);padding:2px 8px;border-radius:20px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-left:8px;}
+        .hours-badge{background:var(--accent);color:var(--blue);padding:2px 8px;border-radius:20px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-left:8px;}
 
         .form-wrap{background:var(--bg-alt);border-radius:12px;padding:40px;border:1.5px solid var(--border);transition:background var(--t),border-color var(--t);}
         .form-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);margin-bottom:6px;transition:color var(--t);}
@@ -62,7 +62,7 @@
         .form-check input[type=checkbox]:checked + label::before{
             background:var(--blue);
             border-color:var(--blue);
-            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1,5 4.5,8.5 11,1' fill='none' stroke='%23FFDD00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1,5 4.5,8.5 11,1' fill='none' stroke='%2300afbf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
             background-repeat:no-repeat;
             background-position:center;
             background-size:12px;
@@ -114,11 +114,11 @@
             .mic:first-child{border-radius:10px;}
             .mic:last-child{border-radius:10px;border-left:none;border-top:none;}
             .mic-icon{font-size:20px;}
-            .mic-title{font-size:22px;color:var(--yellow);}
+            .mic-title{font-size:22px;color:var(--accent);}
             .mic-text{font-size:12px;}
         }
     </style>
-        <link rel="shortcut icon" href="images/adesportiva.png" type="image/x-icon">
+        <link rel="shortcut icon" href="images/new logo/desportiva Logo Symbol.svg" type="image/svg+xml">
 
 </head>
 <body>
@@ -136,12 +136,12 @@
     <li><a href="proceso.html">Cómo funciona</a></li>
     <li><a href="testimonios.html">Opiniones</a></li>
     <li><a href="contacto.html" class="btn-matricula">Matricularse</a></li>
-    <div class="nav-footer-info">AutoEscuela Elite · Desde 2009</div>
+    <div class="nav-footer-info">Escola de Condução Desportiva · Desde 2009</div>
 </ul>
 
 <nav>
 <a href="index.html" class="nav-logo">
-    <img src="images/adesportiva.png" alt="Logo Adesportiva" width="180" height="44" style="height: 44px; width: auto;">
+    <img src="images/new logo/desportiva Inverted Color.svg" alt="Logo Desportiva" width="180" height="44" style="height: 44px; width: auto;">
 </a>
 
     <!-- Burger animado (3 barras → X) -->
@@ -165,7 +165,7 @@
     <!-- ACCESOS RÁPIDOS -->
     <div class="quick-actions reveal">
         <a href="tel:+34900000000" class="qa"><div class="qa-icon">📞</div><div class="qa-label">Llamar ahora</div><div class="qa-sub">+34 900 000 000</div></a>
-        <a href="https://wa.me/34600000000" class="qa yellow" target="_blank"><div class="qa-icon">💬</div><div class="qa-label">WhatsApp</div><div class="qa-sub">Respuesta inmediata</div></a>
+        <a href="https://wa.me/34600000000" class="qa accent" target="_blank"><div class="qa-icon">💬</div><div class="qa-label">WhatsApp</div><div class="qa-sub">Respuesta inmediata</div></a>
         <a href="/cdn-cgi/l/email-protection#b1d8dfd7def1d0c4c5ded4c2d2c4d4ddd0d4ddd8c5d49fd4c2" class="qa"><div class="qa-icon">✉️</div><div class="qa-label">Email</div><div class="qa-sub"><span class="__cf_email__" data-cfemail="8be2e5ede4cbeafeffe4eef8e8feeee7eaeee7e2ffeea5eef8">[email&#160;protected]</span></div></a>
     </div>
 
@@ -288,12 +288,12 @@
 <!-- FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-brand"><a href="index.html" class="nav-logo" style="display:inline-block;margin-bottom:4px">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a><a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a></div></div>
+        <div class="footer-brand"><img src="images/new logo/desportiva Inverted Color.svg" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;"><p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a><a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a></div></div>
         <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
         <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
         <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+    <div class="footer-bottom"><span>© 2025 Escola de Condução Desportiva. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
 </footer>
 
 <script src="theme.js"></script>
@@ -316,7 +316,7 @@
 
     if (esDiaLaboral && (abiertoMañana || abiertoTarde)) {
         badge.textContent = "Abierto";
-        badge.style.background = "var(--yellow)"; // Color amarillo si está abierto
+        badge.style.background = "var(--accent)"; // Color amarillo si está abierto
         badge.style.color = "var(--blue)";
     } else {
         badge.textContent = "Cerrado";
