@@ -61,6 +61,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
+        max-width: 100%;
         background: var(--bg);
         color: var(--text-body);
         font-family: 'DM Sans', sans-serif;
@@ -215,6 +216,8 @@ nav {
     padding: 20px 60px;
     transition: background 0.5s ease, padding 0.4s ease, box-shadow 0.4s ease;
     background: var(--blue);
+    right: 0;
+    width: 100vw;
 }
 
 nav.scrolled {
@@ -472,7 +475,7 @@ nav.scrolled .nav-logo img {
     .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px); background-size: 60px 60px; }
     .page-hero::before { content:''; position:absolute; right:0; top:0; bottom:0; width:45%; background: rgba(255,221,0,0.05); clip-path:polygon(15% 0,100% 0,100% 100%,0 100%); }
     .page-hero-content { position: relative; z-index: 2; max-width: 760px; }
-    .page-tag { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,221,0,0.12); padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(255,221,0,0.35); font-weight: 700; }
+    .page-tag { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; display: inline-flex; align-items: center; gap: 8px; background: #ffa20040; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--orange); font-weight: 700; }
     .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px,7vw,96px); line-height: 0.95; letter-spacing: 2px; margin-bottom: 22px; color: #fff; }
     .page-title em { font-style: normal; color: var(--orange); }
     .page-subtitle { font-size: 17px; color: rgba(255,255,255,0.78); line-height: 1.75; font-weight: 300; max-width: 560px; }
@@ -778,7 +781,7 @@ nav.scrolled .nav-logo img {
         width: 38px; height: 38px;
         background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
         border-radius: 8px; display: flex; align-items: center; justify-content: center;
-        color: rgba(255,255,255,0.7); font-size: 15px; text-decoration: none;
+        color: rgba(255,255,255,0.7); font-size: 22px; text-decoration: none;
         transition: all var(--t);
     }
     .social-link:hover { background: var(--orange); border-color: var(--orange); color: var(--blue); transform: translateY(-2px); }
@@ -825,6 +828,8 @@ nav.scrolled .nav-logo img {
         .page-hero { padding: 120px 30px 60px; }
         .section { padding: 60px 30px; }
         .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        .nav-links { padding-bottom: 100px; }
+        .nav-footer-info { bottom: 28px; }
     }
 
     @media (max-width: 768px) {
