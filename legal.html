@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Privacidade | A Desportiva</title>
+
+    <meta name="description" content="Informações de privacidade e contacto da Escola de Condução A Desportiva.">
+
+    <!-- SHARED CSS -->
+    <link rel="stylesheet" href="shared.css">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon"
+    href="images/new logo/desportiva Logo Symbol.svg"
+    type="image/svg+xml">
+
+    <style>
+
+        .privacy-hero{
+            padding:160px 60px 90px;
+            background:linear-gradient(
+                135deg,
+                var(--blue) 0%,
+                var(--blue-dark) 100%
+            );
+            position:relative;
+            overflow:hidden;
+            border-bottom:4px solid var(--orange);
+        }
+
+        .privacy-hero::before{
+            content:'';
+            position:absolute;
+            inset:0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.03) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.03) 1px,
+                    transparent 1px
+                );
+
+            background-size:60px 60px;
+        }
+
+        .privacy-hero-content{
+            position:relative;
+            z-index:2;
+            width:100%;
+        }
+
+        .privacy-tag{
+            display:inline-flex;
+            align-items:center;
+
+            border:1px solid var(--orange);
+            color:var(--orange);
+
+            padding:6px 14px;
+            border-radius:999px;
+
+            font-size:11px;
+            letter-spacing:2px;
+            text-transform:uppercase;
+
+            margin-bottom:24px;
+
+            background:rgba(255,162,0,0.12);
+        }
+
+        .privacy-title{
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(56px,8vw,110px);
+            line-height:0.92;
+            letter-spacing:2px;
+            color:#fff;
+
+            margin-bottom:24px;
+        }
+
+        .privacy-title span{
+            color:var(--orange);
+        }
+
+        .privacy-subtitle{
+            color:rgba(255,255,255,0.72);
+            font-size:17px;
+            line-height:1.8;
+            max-width:720px;
+        }
+
+        .privacy-update{
+            color:rgba(255,255,255,0.5);
+            font-size:14px;
+            margin-top:18px;
+        }
+
+        .privacy-section{
+            padding:100px 60px;
+            background:var(--bg);
+        }
+
+        .privacy-block{
+            width:100%;
+            padding-bottom:70px;
+            margin-bottom:70px;
+            border-bottom:1px solid var(--border);
+        }
+
+        .privacy-block:last-of-type{
+            border-bottom:none;
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+
+        .privacy-block h2{
+            font-family:'DM Serif Display',serif;
+            font-size:42px;
+            color:var(--text);
+
+            margin-bottom:24px;
+        }
+
+        .privacy-block p{
+            color:var(--text-body);
+            line-height:2;
+            font-size:16px;
+
+            margin-bottom:20px;
+            width:100%;
+        }
+
+        @media(max-width:768px){
+
+            .privacy-hero{
+                padding:140px 24px 70px;
+            }
+
+            .privacy-section{
+                padding:70px 24px;
+            }
+
+            .privacy-title{
+                font-size:64px;
+            }
+
+            .privacy-block{
+                padding-bottom:50px;
+                margin-bottom:50px;
+            }
+
+            .privacy-block h2{
+                font-size:32px;
+            }
+
+            .privacy-block p{
+                font-size:15px;
+                line-height:1.9;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+    <a href="index.html" class="nav-logo">
+        <img src="images/logo/adesportiva-logo.png"
+        alt="Logo A Desportiva">
+    </a>
+
+    <button class="nav-toggle"
+    onclick="toggleMenu(event)"
+    aria-label="Menu">
+
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+
+    </button>
+
+</nav>
+
+<div class="nav-overlay"
+id="navOverlay"
+onclick="toggleMenu()"></div>
+
+<ul class="nav-links" id="navLinks">
+
+    <li><a href="index.html">Início</a></li>
+    <li><a href="cursos.html">Cursos</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+
+    <li>
+        <a href="contacto.html" class="btn-matricula">
+            Matricular-se
+        </a>
+    </li>
+
+    <div class="nav-footer-info">
+        Escola de Condução A Desportiva
+    </div>
+
+</ul>
+
+<!-- HERO -->
+
+<section class="privacy-hero">
+
+    <div class="privacy-hero-content">
+
+        <div class="privacy-tag">
+            Privacidade
+        </div>
+
+        <h1 class="privacy-title">
+            PRIVACIDADE<br>
+            E <span>CONTACTO</span>
+        </h1>
+
+        <p class="privacy-subtitle">
+            Informações relativas à utilização do formulário
+            de contacto da Escola de Condução
+            A Desportiva.
+        </p>
+
+        <div class="privacy-update">
+            Última atualização · Maio 2026
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTENT -->
+
+<section class="privacy-section">
+
+    <div class="privacy-block">
+
+        <h2>Privacidade e Contacto</h2>
+
+        <p>
+            Os dados enviados através do formulário de contacto
+            serão utilizados exclusivamente para responder a pedidos
+            de informação relacionados com a Escola de Condução
+            A Desportiva.
+        </p>
+
+        <p>
+            O envio das informações é realizado voluntariamente
+            pelo utilizador através do website.
+        </p>
+
+    </div>
+
+    <div class="privacy-block">
+
+        <h2>Utilização dos Dados</h2>
+
+        <p>
+            Os dados enviados não serão vendidos,
+            distribuídos ou partilhados com terceiros.
+        </p>
+
+        <p>
+            As informações recebidas serão utilizadas apenas
+            para contacto direto relacionado com os serviços
+            disponibilizados pela escola.
+        </p>
+
+    </div>
+
+    <div class="privacy-block">
+
+        <h2>Direitos do Utilizador</h2>
+
+        <p>
+            Nos termos do Regulamento Geral sobre a Proteção
+            de Dados (RGPD), o utilizador poderá solicitar
+            informações relativas aos dados enviados através
+            do formulário de contacto.
+        </p>
+
+        <p>
+            Para qualquer questão relacionada com privacidade:
+            <strong>contacto@adesportiva.pt</strong>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <!-- 👉 LOGO FOOTER: <img src="logo-blanco.png" alt="AutoEscuela Elite" style="height:48px;margin-bottom:12px;display:block"> -->
+            <img src="images/logo/desportiva Main Logo.png" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;">
+            <p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li><li><a href="cursos.html">Intensivos</a></li></ul></div>
+        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Escola de Condução Desportiva. Todos los derechos reservados.</span>
+    </div>
+</footer>
+
+<script src="theme.js"></script>
+
+<script>
+
+function toggleMenu(event) {
+
+    if(event) event.stopPropagation();
+
+    const nav = document.querySelector('nav');
+    const navLinks = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+
+    nav.classList.toggle('menu-abierto');
+    navLinks.classList.toggle('open');
+    overlay.classList.toggle('visible');
+
+}
+
+window.addEventListener('scroll', () => {
+
+    const nav = document.querySelector('nav');
+
+    if(window.scrollY > 50){
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+
+});
+
+</script>
+
+</body>
+</html>
