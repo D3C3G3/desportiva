@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="shared.css">
     <style>
         /* RATING OVERVIEW */
-        .rating-hero{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;background:var(--blue);border-radius:8px;padding:48px;margin-bottom:56px;border:3px solid var(--yellow);}
+        .rating-hero{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;background:var(--blue);border-radius:8px;padding:48px;margin-bottom:56px;border:3px solid var(--orange);}
         .rating-left{text-align:center;}
-        .rating-big{font-family:'Bebas Neue',sans-serif;font-size:100px;color:var(--yellow);line-height:1;}
-        .rating-stars{color:var(--yellow);font-size:28px;margin:4px 0;}
+        .rating-big{font-family:'Bebas Neue',sans-serif;font-size:100px;color:var(--orange);line-height:1;}
+        .rating-stars{color:var(--orange);font-size:28px;margin:4px 0;}
         .rating-count{color:rgba(255,255,255,0.6);font-size:13px;}
         .rating-bars{display:flex;flex-direction:column;gap:10px;}
         .rb-row{display:flex;align-items:center;gap:14px;font-size:14px;}
         .rb-label{color:rgba(255,255,255,0.7);min-width:40px;}
         .rb-track{flex:1;height:8px;background:rgba(255,255,255,0.15);border-radius:4px;overflow:hidden;}
-        .rb-fill{height:100%;background:var(--yellow);border-radius:4px;transition:width 1.2s ease;}
+        .rb-fill{height:100%;background:var(--orange);border-radius:4px;transition:width 1.2s ease;}
         .rb-count{color:rgba(255,255,255,0.5);min-width:44px;text-align:right;}
 
         /* FILTER */
@@ -27,14 +27,14 @@
         .filter-btn:hover,.filter-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
 
         /* FEATURED */
-        .featured-review{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:8px;padding:48px;border:3px solid var(--yellow);margin-bottom:48px;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
+        .featured-review{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:8px;padding:48px;border:3px solid var(--orange);margin-bottom:48px;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;}
         .fr-score{text-align:center;min-width:140px;}
-        .fr-big{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--yellow);line-height:1;}
-        .fr-stars{color:var(--yellow);font-size:22px;}
+        .fr-big{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--orange);line-height:1;}
+        .fr-stars{color:var(--orange);font-size:22px;}
         .fr-label{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
         .fr-quote{font-family:'DM Serif Display',serif;font-size:clamp(17px,2.5vw,24px);line-height:1.55;color:#fff;font-style:italic;margin-bottom:24px;}
         .fr-author{display:flex;align-items:center;gap:16px;}
-        .fr-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;border:3px solid var(--yellow);flex-shrink:0;}
+        .fr-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;border:3px solid var(--orange);flex-shrink:0;}
         .fr-avatar img{width:100%;height:100%;object-fit:cover;}
         .fr-name{font-size:16px;font-weight:700;color:#fff;}
         .fr-detail{font-size:13px;color:rgba(255,255,255,0.55);}
@@ -45,7 +45,7 @@
         .rev-card:hover{border-color:var(--blue);box-shadow:0 10px 28px rgba(0,0,178,0.1);transform:translateY(-2px);}
         .rev-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
         .rev-stars{color:#f5a623;font-size:14px;}
-        .rev-permit{background:var(--yellow);color:var(--blue);padding:3px 10px;border-radius:2px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+        .rev-permit{background:var(--orange);color:var(--blue);padding:3px 10px;border-radius:2px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
         .rev-text{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.6;color:var(--gray-text);font-style:italic;flex:1;margin-bottom:18px;}
         .rev-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--gray-border);}
         .rev-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid var(--blue-light);flex-shrink:0;}
@@ -220,7 +220,8 @@
     </div>
 </section>
 
-<div style="background:var(--yellow);padding:56px 60px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;border-top:3px solid var(--blue);" class="reveal">
+<!-- CTA -->
+<div style="background:var(--orange);padding:56px 60px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;border-top:3px solid var(--blue);" class="reveal">
     <div><h3 style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--blue)">¿TE CONVENCEMOS?</h3><p style="color:var(--blue);font-size:15px;opacity:0.75;margin-top:4px">Únete a más de 1.200 alumnos satisfechos.</p></div>
     <a href="contacto.html" class="btn-blue">Matricúlate ahora</a>
 </div>
@@ -228,12 +229,26 @@
 <!-- FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-brand"><a href="index.html" class="nav-logo" style="display:inline-block;margin-bottom:4px">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
-        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
-        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul></div>
-        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+        <div class="footer-brand">
+            <!-- 👉 LOGO FOOTER: <img src="logo-blanco.png" alt="AutoEscuela Elite" style="height:48px;margin-bottom:12px;display:block"> -->
+            <img src="images/logo/desportiva Main Logo.png" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;">
+            <p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li><li><a href="cursos.html">Intensivos</a></li></ul></div>
+        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+    <div class="footer-bottom">
+        <span>© 2025 Escola de Condução Desportiva. Todos los derechos reservados.</span>
+        <span>Certificados por la DGT</span>
+    </div>
 </footer>
 <script src="theme.js"></script>
 
