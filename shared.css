@@ -21,10 +21,11 @@
         --surface-hover: #f0f2fc;
 
         /* Texto — MODO CLARO */
-        --text:          #1a1a2e;       /* titulares */
-        --text-body:     #3a3a5c;       /* cuerpo */
-        --text-muted:    #7a7a9a;       /* secundario */
-        --border:        #d8daf0;
+        --text:              #1a1a2e;       /* titulares */
+        --text-body:         #3a3a5c;       /* cuerpo */
+        --text-body-orange:  #ffa200;       /* cuerpo sobre fondo azulado */
+        --text-muted:        #7a7a9a;       /* secundario */
+        --border:            #d8daf0;
 
         /* Sombras */
         --shadow-sm:  0 2px 10px rgba(0,0,178,0.07);
