@@ -36,7 +36,7 @@
     .stat-big {
         font-family: 'Bebas Neue', sans-serif !important;
         font-size: 72px !important;
-        color: var(--yellow) !important;
+        color: var(--orange) !important;
         line-height: 0.8 !important;
         margin: 0 !important;
     }
@@ -47,6 +47,12 @@
         color: #fff !important;
         text-transform: uppercase !important;
         margin-top: 15px !important;
+    }
+
+    .stat-sub {
+        font-size: 12px !important;
+        color: rgba(255,255,255,0.7) !important;
+        margin-top: 8px !important;
     }
 
     /* 2. ARREGLO DE METODO-GRID (ALTURAS IGUALES) */
@@ -83,9 +89,9 @@
         .tl-main-photo{border-radius:8px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,178,0.15);border:3px solid var(--blue-light);}
     .timeline-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
     .timeline{position:relative;padding-left:64px;}
-    .timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--blue) 0%,var(--yellow) 100%);}
+    .timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--blue) 0%,var(--orange) 100%);}
     .tl-item{position:relative;padding:32px 0 32px 32px;border-bottom:1px solid var(--gray-border);}
-    .tl-dot{position:absolute;left:-50px;top:36px;width:20px;height:20px;border-radius:50%;background:var(--yellow);border:3px solid var(--blue);}
+    .tl-dot{position:absolute;left:-50px;top:36px;width:20px;height:20px;border-radius:50%;background:var(--orange);border:3px solid var(--blue);}
 
 
             /* --- OCULTAR SOLO LAS FOTOS EN MÓVIL --- */
@@ -100,7 +106,20 @@
             }
         }
 
-
+        /* SVG dentro de tl-tag — tamaño fijo y alineación */
+        .tl-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            vertical-align: middle;
+        }
+        .tl-tag svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+    
     </style>
     <link rel="shortcut icon" href="images/logo/adesportiva.png" type="image/x-icon">
 
@@ -158,22 +177,99 @@
     <div class="section-header reveal"><span class="section-tag">El proceso</span><h2 class="section-title">Tu carnet, <em>paso a paso</em></h2><div class="section-divider"></div></div>
     <div class="timeline-wrap">
         <div class="timeline">
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 01</div><h3 class="tl-title">Consulta gratuita y matrícula</h3><p class="tl-desc">Todo empieza con una consulta sin compromiso. Te asesoramos sobre qué permiso necesitas. La matrícula se completa online en menos de 5 minutos.</p><div class="tl-tags"><span class="tl-tag">📞 Consulta gratis</span><span class="tl-tag">💻 Online</span><span class="tl-tag">⚡ Alta inmediata</span></div></div>
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 02</div><h3 class="tl-title">Acceso al campus digital</h3><p class="tl-desc">En 24h recibes acceso a nuestro campus online. Más de 3.000 preguntas DGT actualizadas, tests cronometrados, vídeos y simulacros. Disponible 24/7.</p><div class="tl-tags"><span class="tl-tag">📱 App móvil</span><span class="tl-tag">🎯 Tests ilimitados</span><span class="tl-tag">🎬 200+ vídeos</span></div></div>
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 03</div><h3 class="tl-title">Clases prácticas con tu instructor</h3><p class="tl-desc">Te asignamos un instructor fijo desde el primer día. Eliges horario de L–S 8:00–20:00. Clases de 45 min en vehículos modernos con doble mando.</p><div class="tl-tags"><span class="tl-tag">🚗 Flota 2022-24</span><span class="tl-tag">🗓️ Horario flexible</span><span class="tl-tag">👨‍🏫 Instructor fijo</span></div></div>
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 04</div><h3 class="tl-title">Examen teórico DGT</h3><p class="tl-desc">Tu instructor te avisará cuando estés listo. Nosotros gestionamos la cita, la documentación y te acompañamos. 30 preguntas, máximo 3 errores.</p><div class="tl-tags"><span class="tl-tag">📋 Gestión completa</span><span class="tl-tag">📅 Cita gestionada</span></div></div>
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 05</div><h3 class="tl-title">Examen práctico de circulación</h3><p class="tl-desc">Gestionamos la cita con el examinador DGT y te acompañamos en nuestro vehículo. 25 minutos en tráfico real. Si no apruebas, repetimos sin problema.</p><div class="tl-tags"><span class="tl-tag">🚦 Tráfico real</span><span class="tl-tag">🤝 Te acompañamos</span></div></div>
-            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-num">PASO 06</div><h3 class="tl-title">¡Carnet en mano, a conducir!</h3><p class="tl-desc">Gestionamos la emisión del permiso provisional y el definitivo. Recibirás tu carnet en casa en 15-30 días. Y seguimos a tu disposición para lo que necesites.</p><div class="tl-tags"><span class="tl-tag">🎉 Carnet provisional</span><span class="tl-tag">📬 Envío domicilio</span></div></div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 01</div>
+                <h3 class="tl-title">Consulta gratuita y matrícula</h3>
+                <p class="tl-desc">Todo empieza con una consulta sin compromiso. Te asesoramos sobre qué permiso necesitas. La matrícula se completa online en menos de 5 minutos.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z"/></svg>
+                        Consulta gratis
+                    </span>
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M128 96C92.7 96 64 124.7 64 160L64 400L128 400L128 160L512 160L512 400L576 400L576 160C576 124.7 547.3 96 512 96L128 96zM19.2 448C8.6 448 0 456.6 0 467.2C0 509.6 34.4 544 76.8 544L563.2 544C605.6 544 640 509.6 640 467.2C640 456.6 631.4 448 620.8 448L19.2 448z"/></svg>
+                        Online
+                    </span>
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M434.8 54.1C446.7 62.7 451.1 78.3 445.7 91.9L367.3 288L512 288C525.5 288 537.5 296.4 542.1 309.1C546.7 321.8 542.8 336 532.5 344.6L244.5 584.6C233.2 594 217.1 594.5 205.2 585.9C193.3 577.3 188.9 561.7 194.3 548.1L272.7 352L128 352C114.5 352 102.5 343.6 97.9 330.9C93.3 318.2 97.2 304 107.5 295.4L395.5 55.4C406.8 46 422.9 45.5 434.8 54.1z"/></svg>
+                        Alta inmediata
+                    </span>
+                </div>
+            </div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 02</div>
+                <h3 class="tl-title">Acceso al campus digital</h3>
+                <p class="tl-desc">En 24h recibes acceso a nuestro campus online. Más de 3.000 preguntas DGT actualizadas, tests cronometrados, vídeos y simulacros. Disponible 24/7.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M144 128C144 92.7 172.7 64 208 64L432 64C467.3 64 496 92.7 496 128L496 512C496 547.3 467.3 576 432 576L208 576C172.7 576 144 547.3 144 512L144 128zM208 128L208 432L432 432L432 128L208 128zM320 536C337.7 536 352 521.7 352 504C352 486.3 337.7 472 320 472C302.3 472 288 486.3 288 504C288 521.7 302.3 536 320 536z"/></svg>
+                        App móvil
+                    </span>
+                </div>
+            </div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 03</div>
+                <h3 class="tl-title">Clases prácticas con tu instructor</h3>
+                <p class="tl-desc">Te asignamos un instructor fijo desde el primer día. Eliges horario de L–S 8:00–20:00. Clases de 45 min en vehículos modernos con doble mando.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M344 56C344 42.7 333.3 32 320 32C306.7 32 296 42.7 296 56L296 120C296 133.3 306.7 144 320 144C333.3 144 344 133.3 344 120L344 56zM241.3 272L398.8 272C405.5 272 411.4 276.1 413.8 282.4L439.9 352L200.3 352L226.4 282.4C228.7 276.2 234.7 272 241.4 272zM130 356.8L128.7 360.2C109.2 371.1 96 392 96 416L96 544C96 561.7 110.3 576 128 576L144 576C161.7 576 176 561.7 176 544L176 512L464 512L464 544C464 561.7 478.3 576 496 576L512 576C529.7 576 544 561.7 544 544L544 416C544 392 530.8 371.1 511.2 360.1L509.9 356.7L473.6 259.8C461.9 228.6 432 207.9 398.7 207.9L241.2 207.9C207.9 207.9 178 228.6 166.3 259.8L130 356.8zM192 400C209.7 400 224 414.3 224 432C224 449.7 209.7 464 192 464C174.3 464 160 449.7 160 432C160 414.3 174.3 400 192 400zM416 432C416 414.3 430.3 400 448 400C465.7 400 480 414.3 480 432C480 449.7 465.7 464 448 464C430.3 464 416 449.7 416 432zM103 71C93.7 80.4 93.7 95.6 103 105L151 153C160.4 162.4 175.6 162.4 184.9 153C194.2 143.6 194.3 128.4 185 119L137 71C127.6 61.7 112.4 61.7 103 71zM503 71L455 119C445.6 128.4 445.6 143.6 455 152.9C464.4 162.2 479.6 162.3 488.9 152.9L536.9 104.9C546.3 95.5 546.3 80.3 536.9 71C527.5 61.7 512.4 61.7 503 71z"/></svg>
+                        Flota 2022-24
+                    </span>
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M528 320C528 434.9 434.9 528 320 528C205.1 528 112 434.9 112 320C112 205.1 205.1 112 320 112C434.9 112 528 205.1 528 320zM64 320C64 461.4 178.6 576 320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z"/></svg>
+                        Horario flexible
+                    </span>
+                </div>
+            </div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 04</div>
+                <h3 class="tl-title">Examen teórico DGT</h3>
+                <p class="tl-desc">Tu instructor te avisará cuando estés listo. Nosotros gestionamos la cita, la documentación y te acompañamos. 30 preguntas, máximo 3 errores.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M96 64C60.7 64 32 92.7 32 128L32 512C32 547.3 60.7 576 96 576L544 576C579.3 576 608 547.3 608 512L608 128C608 92.7 579.3 64 544 64L96 64zM160 192L480 192C497.7 192 512 206.3 512 224C512 241.7 497.7 256 480 256L160 256C142.3 256 128 241.7 128 224C128 206.3 142.3 192 160 192zM160 320L480 320C497.7 320 512 334.3 512 352C512 369.7 497.7 384 480 384L160 384C142.3 384 128 369.7 128 352C128 334.3 142.3 320 160 320zM160 448L320 448C337.7 448 352 462.3 352 480C352 497.7 337.7 512 320 512L160 512C142.3 512 128 497.7 128 480C128 462.3 142.3 448 160 448z"/></svg>
+                        Gestión completa
+                    </span>
+                </div>
+            </div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 05</div>
+                <h3 class="tl-title">Examen práctico de circulación</h3>
+                <p class="tl-desc">Gestionamos la cita con el examinador DGT y te acompañamos en nuestro vehículo. 25 minutos en tráfico real. Si no apruebas, repetimos sin problema.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M224 32C188.7 32 160 60.7 160 96L160 448C160 536.4 231.6 608 320 608C408.4 608 480 536.4 480 448L480 96C480 60.7 451.3 32 416 32L224 32zM320 424C350.9 424 376 449.1 376 480C376 510.9 350.9 536 320 536C289.1 536 264 510.9 264 480C264 449.1 289.1 424 320 424zM376 320C376 350.9 350.9 376 320 376C289.1 376 264 350.9 264 320C264 289.1 289.1 264 320 264C350.9 264 376 289.1 376 320zM320 216C289.1 216 264 190.9 264 160C264 129.1 289.1 104 320 104C350.9 104 376 129.1 376 160C376 190.9 350.9 216 320 216z"/></svg>
+                        Tráfico real
+                    </span>
+                </div>
+            </div>
+
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-num">PASO 06</div>
+                <h3 class="tl-title">¡Carnet en mano, a conducir!</h3>
+                <p class="tl-desc">Gestionamos la emisión del permiso provisional y el definitivo. Recibirás tu carnet en casa en 15-30 días. Y seguimos a tu disposición para lo que necesites.</p>
+                <div class="tl-tags">
+                    <span class="tl-tag">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 640 640"><path fill="#ffa200" d="M48 96C48 60.7 76.7 32 112 32L240 32C275.3 32 304 60.7 304 96L304 224C304 259.3 275.3 288 240 288L112 288C76.7 288 48 259.3 48 224L48 96zM336 96C336 60.7 364.7 32 400 32L528 32C563.3 32 592 60.7 592 96L592 224C592 259.3 563.3 288 528 288L400 288C364.7 288 336 259.3 336 224L336 96zM48 384C48 348.7 76.7 320 112 320L240 320C275.3 320 304 348.7 304 384L304 512C304 547.3 275.3 576 240 576L112 576C76.7 576 48 547.3 48 512L48 384zM336 384C336 348.7 364.7 320 400 320L528 320C563.3 320 592 348.7 592 384L592 512C592 547.3 563.3 576 528 576L400 576C364.7 576 336 547.3 336 512L336 384z"/></svg>
+                        Envío a domicilio
+                    </span>
+                </div>
+            </div>
+
         </div>
         <div class="tl-photo-col">
-            <!--
-            ╔══════════════════════════════════════════════╗
-            ║  📸  FOTO PROCESO (col. derecha — sticky)    ║
-            ║  Idea: instructor con alumno en clase        ║
-            ║  Tamaño recomendado: 800 × 600 px            ║
-            ║  Para activar: reemplaza .photo-placeholder  ║
-            ╚══════════════════════════════════════════════╝
-            -->
             <div class="tl-main-photo reveal">
                 <div class="photo-placeholder ph-card" style="min-height:280px;border-radius:6px">
                     <span class="ph-icon">📸</span>
@@ -185,13 +281,6 @@
                 <div class="tl-badge-icon">🏆</div>
                 <div><div class="tl-badge-num">98%</div><div class="tl-badge-label">Tasa de aprobados</div></div>
             </div>
-            <!--
-            ╔══════════════════════════════════════════════╗
-            ║  📸  FOTO SECUNDARIA PROCESO                 ║
-            ║  Idea: campus digital / app en móvil         ║
-            ║  Tamaño recomendado: 800 × 600 px            ║
-            ╚══════════════════════════════════════════════╝
-            -->
             <div style="border-radius:8px;overflow:hidden;border:1px solid var(--gray-border)" class="reveal">
                 <div class="photo-placeholder ph-card" style="min-height:200px;border-radius:0">
                     <span class="ph-icon">📱</span>
@@ -281,20 +370,35 @@
 </section>
 
 <!-- CTA BAR -->
-<div class="cta-yellow reveal">
-    <div><h3>¿LISTO PARA EMPEZAR?</h3><p>Primera consulta gratuita. Sin compromiso.</p></div>
-    <a href="contacto.html" class="btn-blue">Matricúlate ahora</a>
+<!-- CTA -->
+<div style="background:var(--orange);padding:56px 60px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;border-top:3px solid var(--blue);" class="reveal">
+    <div><h3 style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--blue)">¿LISTO PARA EMPEZAR?</h3><p style="color:var(--blue);font-size:15px;opacity:0.75;margin-top:4px">Contacta con nosotros para más información.</p></div>
+    <a href="contacto.html" class="btn-blue">CONTACTANOS</a>
 </div>
 
 <!-- FOOTER -->
 <footer>
     <div class="footer-grid">
-        <div class="footer-brand"><a href="index.html" class="nav-logo" style="display:inline-block;margin-bottom:4px">AUTO<span>ELITE</span></a><p>Formando conductores responsables desde 2009. Certificados por la DGT.</p><div class="footer-social"><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-tiktok"></i></a><a href="#" class="social-link"><i class="fab fa-youtube"></i></a></div></div>
-        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
-        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul></div>
-        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li></ul></div>
+        <div class="footer-brand">
+            <!-- 👉 LOGO FOOTER: <img src="logo-blanco.png" alt="AutoEscuela Elite" style="height:48px;margin-bottom:12px;display:block"> -->
+            <img src="images/logo/desportiva Main Logo.png" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;">
+            <p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+            <div class="footer-social">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li><li><a href="cursos.html">Intensivos</a></li></ul></div>
+        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2025 AutoEscuela Elite. Todos los derechos reservados.</span><span>Certificados por la DGT</span></div>
+    <div class="footer-bottom">
+        <span>© 2025 Escola de Condução Desportiva. Todos los derechos reservados.</span>
+        <span>Certificados por la DGT</span>
+    </div>
 </footer>
 <script src="theme.js"></script>
 
