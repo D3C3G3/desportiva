@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt">
 <script>if(localStorage.getItem('autoelite-theme')==='dark')document.documentElement.classList.add('dark');</script>
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,6 @@
         /* HERO DERECHA — FOTO */
         .hero-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:16px; animation:fadeUp 0.9s 0.3s ease both; }
         .hero-main-photo { width:100%; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.35);}
-        /* 👉 Para añadir foto: pon un <img src="foto.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"> dentro de .hero-main-photo y elimina el .photo-placeholder */
         .hero-badges-row { display:flex; gap:12px; }
         .hero-badge { flex:1; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:14px 16px; border-radius:6px; display:flex; align-items:center; gap:10px; }
         .hb-icon { font-size:20px; }
@@ -46,7 +45,6 @@
         .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
         .about-photo-wrap { position:relative; }
         .about-photo { width:100%; border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,178,0.15); }
-        /* 👉 Para añadir foto: <img src="sede.jpg" alt="" style="width:100%;aspect-ratio:4/5;object-fit:cover;display:block;"> */
         .about-badge-float { position:absolute; bottom:-20px; right:-20px; background:var(--orange); padding:20px 24px; border-radius:6px; box-shadow:0 8px 24px rgba(255,255,0,0.35); text-align:center; }
         .abf-num { font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--blue); line-height:1; }
         .abf-label { font-size:10px; color:var(--blue); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
@@ -100,7 +98,6 @@
         .cta-inner { position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
         .cta-photo { border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.3); }
         .cta-photo img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
-        /* 👉 Para añadir foto CTA: <img src="alumnos.jpg" alt=""> dentro de .cta-photo, elimina el .photo-placeholder */
         .cta-text h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,5vw,68px); color:#fff; line-height:1; margin-bottom:18px; }
         .cta-text h2 span { color:var(--orange); }
         .cta-text p { font-size:16px; color:rgba(255,255,255,0.72); margin-bottom:32px; line-height:1.7; }
@@ -129,16 +126,16 @@
 <body>
 
 
-<!-- Overlay oscuro -->
+<!-- Overlay escuro -->
 <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
 
-<!-- Panel menú (fuera del nav para quedar sobre el overlay) -->
+<!-- Painel menu -->
 <ul class="nav-links" id="navLinks">
     <li><a href="cursos.html">Cursos</a></li>
-    <li><a href="proceso.html">Cómo funciona</a></li>
-    <li><a href="testimonios.html">Opiniones</a></li>
-    <li><a href="contacto.html" class="btn-matricula">Matricularse</a></li>
-    <div class="nav-footer-info">Escola de Condução Desportiva · Desde 2009</div>
+    <li><a href="proceso.html">Como funciona</a></li>
+    <li><a href="testimonios.html">Opiniões</a></li>
+    <li><a href="contacto.html" class="btn-matricula">Matricular-se</a></li>
+    <div class="nav-footer-info">Escola de Condução A Desportiva · Desde 2009</div>
 </ul>
 
 <nav>
@@ -146,48 +143,39 @@
     <img src="images/logo/adesportiva-logo.png" alt="Logo Desportiva" style="height: 50px; width: auto;">
 </a>
 
-    <!-- Burger animado (3 barras → X) -->
-    <button class="nav-toggle" onclick="toggleMenu(event)" aria-label="Menú">
+    <!-- Burger animado -->
+    <button class="nav-toggle" onclick="toggleMenu(event)" aria-label="Menu">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
     </button>
 </nav>
 
-<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<!-- HERO -->
 <section id="hero">
     <div class="hero-left">
         
-        <h1 class="hero-title">CONDUCE<br>TU<br><em>FUTURO</em></h1>
-        <p class="hero-sub">Formación de conductores de élite. Clases teóricas y prácticas con los mejores instructores certificados. Tu carnet en el menor tiempo posible.</p>
+        <h1 class="hero-title">CONDUZ<br>O TEU<br><em>FUTURO</em></h1>
+        <p class="hero-sub">Formação de condutores de elite. Aulas teóricas e práticas com os melhores instrutores certificados. A tua carta no menor tempo possível.</p>
         <div class="hero-btns">
             <a href="cursos.html" class="btn-primary">Ver Cursos</a>
             <a href="contacto.html" class="btn-outline-white">Contactar</a>
         </div>
         <div class="hero-stats">
-            <div><div class="h-stat-num">98%</div><div class="h-stat-label">Tasa aprobados</div></div>
-            <div><div class="h-stat-num">12K+</div><div class="h-stat-label">Alumnos formados</div></div>
-            <div><div class="h-stat-num">15+</div><div class="h-stat-label">Años experiencia</div></div>
+            <div><div class="h-stat-num">98%</div><div class="h-stat-label">Taxa de aprovação</div></div>
+            <div><div class="h-stat-num">12K+</div><div class="h-stat-label">Alunos formados</div></div>
+            <div><div class="h-stat-num">15+</div><div class="h-stat-label">Anos de experiência</div></div>
         </div>
     </div>
 
     <div class="hero-right">
-        <!--
-        ╔══════════════════════════════════════════════╗
-        ║  📸  FOTO PRINCIPAL HERO                     ║
-        ║  Idea: fachada sede, coche de prácticas      ║
-        ║  Tamaño recomendado: 1200 × 900 px           ║
-        ║  Para activar: añade <img src="foto.jpg">    ║
-        ║  dentro de .hero-main-photo y borra el div   ║
-        ╚══════════════════════════════════════════════╝
-        -->
 <div class="hero-main-photo">
     <img src="images/unnamed.webp" alt="Escola de Condução Adesportiva em Santo Tirso" width="600" height="450" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;display:block;">
 </div>  
         <div class="hero-badges-row">
             <div class="hero-badge"><div class="hb-icon">🏆</div><div><div class="hb-num">4.9★</div><div class="hb-label">Google Reviews</div></div></div>
-            <div class="hero-badge"><div class="hb-icon">✅</div><div><div class="hb-num">DGT</div><div class="hb-label">Certificados</div></div></div>
-            <div class="hero-badge"><div class="hb-icon">🚗</div><div><div class="hb-num">2024</div><div class="hb-label">Flota nueva</div></div></div>
+            <div class="hero-badge"><div class="hb-icon">✅</div><div><div class="hb-num">IMT</div><div class="hb-label">Certificados</div></div></div>
+            <div class="hero-badge"><div class="hb-icon">🚗</div><div><div class="hb-num">2024</div><div class="hb-label">Frota nova</div></div></div>
         </div>
     </div>
 </section>
@@ -195,77 +183,63 @@
 <!-- MARQUEE -->
 <div class="marquee-section">
     <div class="marquee-track">
-        <span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CLASES INTENSIVAS</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">98% APROBADOS</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET B</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET A</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET C</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CARNET AM</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">CLASES INTENSIVAS</span><span class="marquee-dot">◆</span>
-        <span class="marquee-item">98% APROBADOS</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA B</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA A</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA C</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA AM</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">AULAS INTENSIVAS</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">98% APROVADOS</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA B</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">CARTA A</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">AULAS INTENSIVAS</span><span class="marquee-dot">◆</span>
+        <span class="marquee-item">98% APROVADOS</span><span class="marquee-dot">◆</span>
     </div>
 </div>
 
 <!-- FEATURES -->
 <section class="section">
     <div class="section-header reveal" style="text-align:center;max-width:640px;margin:0 auto 56px">
-        <span class="section-tag" style="display:block;text-align:center">Por qué elegirnos</span>
-        <h2 class="section-title">Lo que nos hace <em>diferentes</em></h2>
+        <span class="section-tag" style="display:block;text-align:center">Porquê escolher-nos</span>
+        <h2 class="section-title">O que nos torna <em>diferentes</em></h2>
         <div class="section-divider" style="margin:14px auto 0"></div>
     </div>
     <div class="features-grid">
-        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-graduation-cap"></i></div><div class="feat-title">98% de aprobados</div><div class="feat-desc">La tasa de éxito más alta de la región. Método probado con más de 12.000 alumnos en 15 años.</div></div>
-        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-clock"></i></div><div class="feat-title">Horarios flexibles</div><div class="feat-desc">Clases de lunes a sábado, mañana y tarde. Adapta la formación a tu vida, no al revés.</div></div>
-        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-laptop"></i></div><div class="feat-title">Campus digital 24/7</div><div class="feat-desc">Tests, vídeos y simulacros desde cualquier dispositivo. Estudia donde y cuando quieras.</div></div>
-        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-shield-alt"></i></div><div class="feat-title">Garantía de aprobado</div><div class="feat-desc">Si no apruebas en el primer intento, repetimos las clases necesarias sin coste adicional.</div></div>
+        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-graduation-cap"></i></div><div class="feat-title">98% de aprovados</div><div class="feat-desc">A taxa de sucesso mais alta da região. Método comprovado com mais de 12.000 alunos em 15 anos.</div></div>
+        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-clock"></i></div><div class="feat-title">Horários flexíveis</div><div class="feat-desc">Aulas de segunda a sábado, manhã e tarde. Adapta a formação à tua vida, não o contrário.</div></div>
+        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-laptop"></i></div><div class="feat-title">Campus digital 24/7</div><div class="feat-desc">Testes, vídeos e simulacros em qualquer dispositivo. Estuda onde e quando quiseres.</div></div>
+        <div class="feat-card reveal"><div class="icon-box"><i class="fas fa-shield-alt"></i></div><div class="feat-title">Garantia de aprovação</div><div class="feat-desc">Se não aprovares à primeira, repetimos as aulas necessárias sem custos adicionais.</div></div>
     </div>
 </section>
 
-<!-- SOBRE NOSOTROS -->
+<!-- SOBRE NÓS -->
 <section class="section section-alt">
     <div class="about-grid">
-        <!--
-        ╔══════════════════════════════════════════════╗
-        ║  📸  FOTO SOBRE NOSOTROS (lado izquierdo)    ║
-        ║  Idea: interior sede, instructores en grupo  ║
-        ║  Tamaño recomendado: 900 × 1100 px           ║
-        ║  Para activar: sustituye .photo-placeholder  ║
-        ║  por <img src="sede.jpg" alt="" style=       ║
-        ║  "width:100%;aspect-ratio:4/5;               ║
-        ║  object-fit:cover;display:block;             ║
-        ║  border-radius:8px">                         ║
-        ╚══════════════════════════════════════════════╝
-        -->
         <div class="about-photo-wrap reveal">
             <div class="about-photo">
                 <img style="max-width: 100%; height: auto;" src="images/clase.webp" alt="">
             </div>
             <div class="about-badge-float">
                 <div class="abf-num">15+</div>
-                <div class="abf-label">Años formando<br>conductores</div>
+                <div class="abf-label">Anos a formar<br>condutores</div>
             </div>
         </div>
 
         <div class="about-text reveal">
-            <span class="section-tag">Quiénes somos</span>
-            <h2 class="section-title">Una autoescuela diferente, <em>de verdad</em></h2>
+            <span class="section-tag">Quem somos</span>
+            <h2 class="section-title">Uma escola de condução diferente, <em>de verdade</em></h2>
             <div class="section-divider"></div>
             <p style="color:var(--gray-mid);line-height:1.75;font-size:15px;margin-bottom:12px">
-                Llevamos más de 15 años formando conductores responsables. Somos una autoescuela certificada por la DGT con un equipo de instructores apasionados y una metodología probada que nos ha llevado a conseguir la tasa de aprobados más alta de la región.
+                Há mais de 15 anos que formamos condutores responsáveis. Somos uma escola de condução certificada pelo IMT com uma equipa de instrutores apaixonados e uma metodologia comprovada que nos levou a conseguir a taxa de aprovação mais alta da região.
             </p>
             <p style="color:var(--gray-mid);line-height:1.75;font-size:15px">
-                Más de 12.000 alumnos han pasado por nuestras aulas y nuestros vehículos. Muchos de ellos ya llevan a sus hijos a formarse con nosotros.
+                Mais de 12.000 alunos já passaram pelas nossas salas e pelos nossos veículos. Muitos deles já trazem os seus filhos para se formarem connosco.
             </p>
             <div class="about-points">
-                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Flota renovada cada 2 años</h4><p>Conducirás en vehículos modernos, seguros y cómodos.</p></div></div>
-                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Instructor personal fijo</h4><p>El mismo profesional desde el primer día hasta el examen.</p></div></div>
-                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Gestión completa del examen</h4><p>Nos encargamos de toda la burocracia con la DGT.</p></div></div>
+                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Frota renovada a cada 2 anos</h4><p>Conduzirás veículos modernos, seguros e confortáveis.</p></div></div>
+                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Instrutor pessoal fixo</h4><p>O mesmo profissional desde o primeiro dia até ao exame.</p></div></div>
+                <div class="about-point"><div class="ap-check"><i class="fas fa-check"></i></div><div class="ap-text"><h4>Gestão completa do exame</h4><p>Tratamos de toda a burocracia com o IMT.</p></div></div>
             </div>
-            <div style="margin-top:32px"><a href="proceso.html" class="btn-primary">Cómo funciona</a></div>
+            <div style="margin-top:32px"><a href="proceso.html" class="btn-primary">Como funciona</a></div>
         </div>
     </div>
 </section>
@@ -273,11 +247,11 @@
 <section class="section">
     <div class="section-header-row reveal">
         <div>
-            <span class="section-tag">Lo que ofrecemos</span>
-            <h2 class="section-title">Nuestros <em>cursos</em></h2>
+            <span class="section-tag">O que oferecemos</span>
+            <h2 class="section-title">Os nossos <em>cursos</em></h2>
             <div class="section-divider"></div>
         </div>
-        <a href="cursos.html" class="btn-outline">Ver todos los permisos</a>
+        <a href="cursos.html" class="btn-outline">Ver todas as categorias</a>
     </div>
 
     <div class="courses-row">
@@ -287,10 +261,10 @@
             </div>
             <div class="c-card-body">
                 <div class="c-permit">B</div>
-                <div class="c-name">Permiso B — Coche</div>
-                <div class="c-desc">Formación completa en ciudad y carretera con vehículos modernos. El carnet más demandado.</div>
+                <div class="c-name">Categoria B — Ligeiros</div>
+                <div class="c-desc">Formação completa em cidade e estrada com veículos modernos. A carta mais procurada.</div>
                 <div class="c-price">Desde 599€ <small>/ pack completo</small></div>
-                <a href="cursos.html" class="c-link">Más información <i class="fas fa-arrow-right"></i></a>
+                <a href="cursos.html" class="c-link">Mais informações <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -300,10 +274,10 @@
             </div>
             <div class="c-card-body">
                 <div class="c-permit">A</div>
-                <div class="c-name">Permiso A — Moto</div>
-                <div class="c-desc">Desde A1 hasta A. Circuito propio de maniobras y formación especializada en seguridad.</div>
+                <div class="c-name">Categoria A — Motociclos</div>
+                <div class="c-desc">Desde A1 até A. Circuito próprio de manobras e formação especializada em segurança.</div>
                 <div class="c-price">Desde 450€ <small>/ pack completo</small></div>
-                <a href="cursos.html" class="c-link">Más información <i class="fas fa-arrow-right"></i></a>
+                <a href="cursos.html" class="c-link">Mais informações <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
 
@@ -313,81 +287,71 @@
             </div>
             <div class="c-card-body">
                 <div class="c-permit">C</div>
-                <div class="c-name">Permiso C — Camión</div>
-                <div class="c-desc">Habilitación profesional para vehículos pesados. Bolsa de empleo y CAP incluido opcional.</div>
+                <div class="c-name">Categoria C — Pesados</div>
+                <div class="c-desc">Habilitação profissional para veículos pesados. Bolsa de emprego e CAM incluído opcional.</div>
                 <div class="c-price">Desde 799€ <small>/ pack completo</small></div>
-                <a href="cursos.html" class="c-link">Más información <i class="fas fa-arrow-right"></i></a>
+                <a href="cursos.html" class="c-link">Mais informações <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </section>
 
 
-<!-- TESTIMONIOS -->
+<!-- TESTEMUNHOS -->
 <section class="section">
     <div class="section-header-row reveal">
         <div>
-            <span class="section-tag">Opiniones reales</span>
-            <h2 class="section-title">Lo que dicen <em>nuestros alumnos</em></h2>
+            <span class="section-tag">Opiniões reais</span>
+            <h2 class="section-title">O que dizem os <em>nossos alunos</em></h2>
             <div class="section-divider"></div>
         </div>
         <div style="text-align:right">
             <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--blue);line-height:1">4.9</div>
             <div style="color:#f5a623;font-size:16px">★★★★★</div>
-            <div style="font-size:12px;color:var(--gray-mid);margin-top:4px">1.200+ reseñas</div>
+            <div style="font-size:12px;color:var(--gray-mid);margin-top:4px">1.200+ avaliações</div>
         </div>
     </div>
     <div class="testi-row">
         <div class="t-card reveal">
             <div class="t-stars">★★★★★</div>
-            <div class="t-text">"Aprobé el teórico a la primera y el práctico al segundo intento. Los instructores son increíbles, muy pacientes y profesionales."</div>
+            <div class="t-text">"Aprovei o código à primeira e a condução à segunda tentativa. Os instrutores são incríveis, muito pacientes e profissionais."</div>
             <div class="t-author">
-                <!-- 👉 Avatar: <img src="alumna-ml.jpg" alt="María López"> cuando tengas foto -->
                 <div class="t-avatar-wrap"><div class="photo-placeholder" style="width:42px;height:42px;border-radius:50%;border:none"><span style="font-size:18px">👤</span></div></div>
-                <div><div class="t-name">María López</div><div class="t-detail">Permiso B · Marzo 2024</div></div>
+                <div><div class="t-name">Maria Lopes</div><div class="t-detail">Categoria B · Março 2024</div></div>
             </div>
         </div>
         <div class="t-card reveal">
             <div class="t-stars">★★★★★</div>
-            <div class="t-text">"El método de estudio online es excelente. Me adapté perfectamente a mis horarios de trabajo. Totalmente recomendable."</div>
+            <div class="t-text">"O método de estudo online é excelente. Adaptei-me perfeitamente aos meus horários de trabalho. Totalmente recomendável."</div>
             <div class="t-author">
                 <div class="t-avatar-wrap"><div class="photo-placeholder" style="width:42px;height:42px;border-radius:50%;border:none"><span style="font-size:18px">👤</span></div></div>
-                <div><div class="t-name">Carlos García</div><div class="t-detail">Permiso A2 · Enero 2024</div></div>
+                <div><div class="t-name">Carlos Garcia</div><div class="t-detail">Categoria A2 · Janeiro 2024</div></div>
             </div>
         </div>
         <div class="t-card reveal">
             <div class="t-stars">★★★★★</div>
-            <div class="t-text">"Después de suspender en otra autoescuela, aquí aprobé todo en tiempo récord. El cambio de metodología hace toda la diferencia."</div>
+            <div class="t-text">"Depois de chumbar noutra escola, aqui aprovei tudo em tempo recorde. A mudança de metodologia faz toda a diferença."</div>
             <div class="t-author">
                 <div class="t-avatar-wrap"><div class="photo-placeholder" style="width:42px;height:42px;border-radius:50%;border:none"><span style="font-size:18px">👤</span></div></div>
-                <div><div class="t-name">Ana Rodríguez</div><div class="t-detail">Permiso B · Febrero 2024</div></div>
+                <div><div class="t-name">Ana Rodrigues</div><div class="t-detail">Categoria B · Fevereiro 2024</div></div>
             </div>
         </div>
     </div>
-    <div style="text-align:center;margin-top:40px"><a href="testimonios.html" class="btn-outline">Ver todas las opiniones</a></div>
+    <div style="text-align:center;margin-top:40px"><a href="testimonios.html" class="btn-outline">Ver todas as opiniões</a></div>
 </section>
 
 <!-- CTA -->
 <section id="cta">
     <div class="cta-pattern"></div>
     <div class="cta-inner">
-        <!--
-        ╔══════════════════════════════════════════════╗
-        ║  📸  FOTO CTA (lado izquierdo)               ║
-        ║  Idea: alumno recibiendo carnet / celebración║
-        ║  Tamaño recomendado: 800 × 600 px            ║
-        ║  Para activar: <img src="alumno.jpg" alt=""> ║
-        ║  dentro de .cta-photo, borra placeholder     ║
-        ╚══════════════════════════════════════════════╝
-        -->
         <div class="cta-photo reveal">
 <img style="max-width: 100%; height: auto;" src="images/alumno.webp" alt="Aluno feliz com a carta de condução na Adesportiva">
         </div>
         <div class="cta-text reveal">
-            <h2>¿LISTO PARA<br><span>CONDUCIR?</span></h2>
-            <p>Únete a los más de 12.000 conductores que ya confiaron en nosotros. Primera consulta gratuita, sin compromiso.</p>
-            <a href="contacto.html" class="btn-primary" style="font-size:14px;padding:17px 44px">Empezar ahora</a>
-            <p class="cta-note">Sin compromiso · Consulta gratuita · Respuesta en 24h</p>
+            <h2>PRONTO PARA<br><span>CONDUZIR?</span></h2>
+            <p>Junta-te aos mais de 12.000 condutores que já confiaram em nós. Primeira consulta gratuita, sem compromisso.</p>
+            <a href="contacto.html" class="btn-primary" style="font-size:14px;padding:17px 44px">Começar agora</a>
+            <p class="cta-note">Sem compromisso · Consulta gratuita · Resposta em 24h</p>
         </div>
     </div>
 </section>
@@ -397,10 +361,10 @@
     <div class="footer-grid">
         <div class="footer-brand">
             <img src="images/logo/desportiva Main Logo.png" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;">
-            <p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+            <p>Formação de condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
         </div>
-        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li></ul></div>
-        <div class="footer-col"><h4>Nosotros</h4><ul><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li></ul><h4 style="margin-top:28px;">Legal</h4><ul><li><a href="aviso.html">Aviso legal</a></li></ul></div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permissão B</a></li><li><a href="cursos.html">Permissão A2</a></li><li><a href="cursos.html">Permissão A</a></li><li><a href="cursos.html">Permissão AM</a></li><li><a href="cursos.html">Permissão C</a></li></ul></div>
+        <div class="footer-col"><h4>Nós</h4><ul><li><a href="proceso.html">Como funciona</a></li><li><a href="testimonios.html">Opiniões</a></li></ul><h4 style="margin-top:28px;">Legal</h4><ul><li><a href="aviso.html">Aviso legal</a></li></ul></div>
         <div class="footer-social-col">
             <div class="footer-social">
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -412,8 +376,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>© 2025 Escola de Condução Desportiva. Todos los derechos reservados.</span>
-        <span>Certificados por la DGT</span>
+        <span>© 2025 Escola de Condução Desportiva. Todos os direitos reservados.</span>
     </div>
 </footer>
 
@@ -427,14 +390,14 @@ document.addEventListener("DOMContentLoaded",function(){
   var btn=document.getElementById("themeToggle");
   var lbl=document.getElementById("themeLabel");
   if(!btn||!lbl)return;
-  function syncLabel(){lbl.textContent=document.body.classList.contains("dark")?"Modo claro":"Modo oscuro";}
+  function syncLabel(){lbl.textContent=document.body.classList.contains("dark")?"Modo claro":"Modo escuro";}
   syncLabel();
   btn.addEventListener("click",function(){setTimeout(syncLabel,50);});
 });
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<a href="https://wa.me/34600000000" class="whatsapp-float" target="_blank" title="WhatsApp" aria-label="Contacto por WhatsApp">
+<a href="https://wa.me/351000000000" class="whatsapp-float" target="_blank" title="WhatsApp" aria-label="Contacto por WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 
