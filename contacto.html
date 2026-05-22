@@ -3,10 +3,9 @@
 <script>if(localStorage.getItem('autoelite-theme')==='dark')document.documentElement.classList.add('dark');</script>
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escola de Condução Adesportiva | Carta de Condução em Santo Tirso</title>
-<meta name="description" content="Tira a tua carta de condução na Adesportiva em Santo Tirso. Instrutores qualificados, altas taxas de aprovação e preços competitivos. Inscreve-te já!">
-<meta name="keywords" content="autoescola Santo Tirso, escola de condução Santo Tirso, carta de condução, exames condução">    
-
+    <title>Escola de Condução Adesportiva | Carta de Condução em Santo Tirso</title>
+    <meta name="description" content="Tira a tua carta de condução na Adesportiva em Santo Tirso. Instrutores qualificados, altas taxas de aprovação e preços competitivos. Inscreve-te já!">
+    <meta name="keywords" content="autoescola Santo Tirso, escola de condução Santo Tirso, carta de condução, exames condução">
     <link rel="stylesheet" href="shared.css">
     <style>
         .quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:56px;}
@@ -17,9 +16,7 @@
         .qa-icon{font-size:28px;margin-bottom:10px;}
         .qa-label{font-size:14px;font-weight:700;margin-bottom:4px;}
         .qa-sub{font-size:12px;opacity:0.7;}
-
         .contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;}
-
         .ci-title{font-family:'DM Serif Display',serif;font-size:34px;color:var(--text);margin-bottom:14px;line-height:1.2;transition:color var(--t);}
         .ci-desc{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px;}
         .contact-items-list{display:flex;flex-direction:column;}
@@ -30,7 +27,6 @@
         .c-item-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px;font-weight:700;}
         .c-item-value{font-size:15px;color:var(--text);font-weight:600;transition:color var(--t);}
         .c-item-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
-
         .hours-box{margin-top:32px;background:linear-gradient(135deg,var(--blue) 0%,#1a00cc 100%);border-radius:12px;padding:28px;}
         body.dark .hours-box{background:linear-gradient(135deg,#0a0b1a 0%,#0d0080 100%);}
         .hours-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:16px;}
@@ -40,7 +36,6 @@
         .hours-time{color:#fff;font-weight:600;}
         .hours-closed{color:rgba(255,255,255,0.3);}
         .hours-badge{background:var(--orange);color:var(--blue);padding:2px 8px;border-radius:20px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-left:8px;}
-
         .form-wrap{background:var(--bg-alt);border-radius:12px;padding:40px;border:1.5px solid var(--border);transition:background var(--t),border-color var(--t);}
         .form-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--text);margin-bottom:6px;transition:color var(--t);}
         .form-subtitle{font-size:14px;color:var(--text-muted);margin-bottom:28px;}
@@ -49,94 +44,41 @@
         .form-check{display:flex;align-items:flex-start;gap:12px;}
         .form-check input[type=checkbox]{display:none;}
         .form-check label{font-size:13px;color:var(--text-muted);line-height:1.6;cursor:pointer;display:flex;align-items:flex-start;gap:12px;}
-        .form-check label::before{
-            content:'';
-            display:block;
-            width:20px;height:20px;min-width:20px;
-            border:2px solid var(--border);
-            border-radius:6px;
-            background:var(--surface);
-            margin-top:1px;
-            transition:all 0.2s ease;
-        }
-        .form-check input[type=checkbox]:checked + label::before{
-            background:var(--blue);
-            border-color:var(--blue);
-            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1,5 4.5,8.5 11,1' fill='none' stroke='%23FFDD00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-            background-repeat:no-repeat;
-            background-position:center;
-            background-size:12px;
-        }
+        .form-check label::before{content:'';display:block;width:20px;height:20px;min-width:20px;border:2px solid var(--border);border-radius:6px;background:var(--surface);margin-top:1px;transition:all 0.2s ease;}
+        .form-check input[type=checkbox]:checked + label::before{background:var(--blue);border-color:var(--blue);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1,5 4.5,8.5 11,1' fill='none' stroke='%23FFDD00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:12px;}
         .form-check label:hover::before{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,0,178,0.08);}
         .form-check .check-text{flex:1;}
         .form-check a{color:var(--blue);font-weight:600;}
-        .submit-btn{background:var(--blue);color:#fff;border:none;padding:18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:8px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 16px rgba(0,0,178,0.25);}
+        .submit-btn{background:var(--blue);color:#fff;border:none;padding:18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:8px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 16px rgba(0,0,178,0.25);width:100%; margin-top: 15px;}
         .submit-btn:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,178,0.4);}
         .submit-btn i{transition:transform 0.3s;}
         .submit-btn:hover i{transform:translateX(5px);}
         .form-note{font-size:12px;color:var(--text-muted);text-align:center;}
         .form-note a{color:var(--blue);}
-        .success-msg{display:none;background:#e8f5e9;border:2px solid #4caf50;padding:20px 24px;border-radius:10px;color:#2e7d32;font-size:15px;text-align:center;font-weight:600;}
-        .success-msg.show{display:flex;align-items:center;justify-content:center;gap:12px;}
-
+        .status-msg{display:none;padding:20px 24px;border-radius:10px;font-size:15px;text-align:center;font-weight:600;align-items:center;justify-content:center;gap:12px;margin-bottom:16px;}
+        .status-msg.show{display:flex;}
+        .status-msg.error{background:#fdecea;border:2px solid #f44336;color:#c62828;}
         .map-section{margin-top:72px;}
         .map-container{border-radius:12px;overflow:hidden;border:3px solid var(--blue);box-shadow:var(--shadow-lg);}
-        .map-info-row{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:12px;}
-        .mic{
-            background:var(--blue);
-            padding:12px 40px;
-            display:flex;
-            align-items:center;
-            gap:20px;
-            min-height:58px;
-        }
-        .mic:first-child{border-radius:0 0 0 12px;}
-        .mic:last-child{border-radius:0 0 12px 0; border-left:2px solid rgba(255,255,255,0.15);}
-        body.dark .mic{background:#0d0e20;}
-        .mic-icon{font-size:28px;flex-shrink:0;}
-        .mic-title{
-            font-family:'Bebas Neue',sans-serif;
-            font-size:36px;
-            color:#fff;
-            letter-spacing:2px;
-            line-height:1;
-        }
-        .mic-text{font-size:13px;color:rgba(255,255,255,0.65);margin-top:3px;}
-
-        @media(max-width:1024px){
-            .contact-layout{grid-template-columns:1fr;gap:40px;}
-            .quick-actions{grid-template-columns:1fr;}
-        }
-        @media(max-width:768px){
-            .form-row{grid-template-columns:1fr;}
-            .map-info-row{display:flex;flex-direction:column;gap:12px;margin-top:16px;padding:0;}
-            .mic{border-radius:10px;padding:18px 20px;flex-direction:column;align-items:flex-start;gap:8px;min-height:auto;}
-            .mic:first-child{border-radius:10px;}
-            .mic:last-child{border-radius:10px;border-left:none;border-top:none;}
-            .mic-icon{font-size:20px;}
-            .mic-title{font-size:22px;color:var(--orange);}
-            .mic-text{font-size:12px;}
-        }
+        @media(max-width:1024px){.contact-layout{grid-template-columns:1fr;gap:40px;}.quick-actions{grid-template-columns:1fr;}}
+        @media(max-width:768px){.form-row{grid-template-columns:1fr;}}
     </style>
-        <link rel="shortcut icon" href="images/adesportiva.png" type="image/x-icon">
-
+    <link rel="shortcut icon" href="images/logo/adesportiva.png" type="image/x-icon">
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<a href="https://wa.me/34600000000" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/351000000000" class="whatsapp-float" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
-<!-- Overlay oscuro -->
 <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
-
-<!-- Panel menú (fuera del nav para quedar sobre el overlay) -->
+<!-- Painel menu -->
 <ul class="nav-links" id="navLinks">
     <li><a href="cursos.html">Cursos</a></li>
-    <li><a href="proceso.html">Cómo funciona</a></li>
-    <li><a href="testimonios.html">Opiniones</a></li>
-    <li><a href="contacto.html" class="btn-matricula">Matricularse</a></li>
-    <div class="nav-footer-info">AutoEscuela Elite · Desde 2009</div>
+    <li><a href="proceso.html">Como funciona</a></li>
+    <li><a href="testimonios.html">Opiniões</a></li>
+    <li><a href="contacto.html" class="btn-matricula">Matricular-se</a></li>
+    <div class="nav-footer-info">Escola de Condução A Desportiva · Desde 2009</div>
 </ul>
 
 <nav>
@@ -144,8 +86,8 @@
     <img src="images/logo/adesportiva-logo.png" alt="Logo Desportiva" style="height: 50px; width: auto;">
 </a>
 
-    <!-- Burger animado (3 barras → X) -->
-    <button class="nav-toggle" onclick="toggleMenu(event)" aria-label="Menú">
+    <!-- Burger animado -->
+    <button class="nav-toggle" onclick="toggleMenu(event)" aria-label="Menu">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -155,128 +97,169 @@
 <div class="page-hero">
     <div class="page-hero-grid"></div>
     <div class="page-hero-content">
-            <span class="page-tag">Estamos aquí para ti</span>
-        <h1 class="page-title">CONTÁCTANOS<br><em>HOY</em></h1>
-        <p class="page-subtitle">Primera consulta gratuita y sin compromiso. Te respondemos en menos de 24 horas.</p>
+        <span class="page-tag">Estamos aqui para ti</span>
+        <h1 class="page-title">CONTACTA-NOS<br><em>HOJE</em></h1>
+        <p class="page-subtitle">Preenche o formulário e abre a tua aplicação de email com tudo já preenchido. Sem registos, sem contas.</p>
     </div>
 </div>
 
 <section class="section">
-    <!-- ACCESOS RÁPIDOS -->
     <div class="quick-actions reveal">
-        <a href="tel:+34900000000" class="qa"><div class="qa-icon">📞</div><div class="qa-label">Llamar ahora</div><div class="qa-sub">+34 900 000 000</div></a>
-        <a href="https://wa.me/34600000000" class="qa orange" target="_blank"><div class="qa-icon">💬</div><div class="qa-label">WhatsApp</div><div class="qa-sub">Respuesta inmediata</div></a>
-        <a href="/cdn-cgi/l/email-protection#b1d8dfd7def1d0c4c5ded4c2d2c4d4ddd0d4ddd8c5d49fd4c2" class="qa"><div class="qa-icon">✉️</div><div class="qa-label">Email</div><div class="qa-sub"><span class="__cf_email__" data-cfemail="8be2e5ede4cbeafeffe4eef8e8feeee7eaeee7e2ffeea5eef8">[email&#160;protected]</span></div></a>
+        <a href="tel:+351000000000" class="qa">
+            <div class="qa-icon">📞</div>
+            <div class="qa-label">Ligar agora</div>
+            <div class="qa-sub">+351 000 000 000</div>
+        </a>
+        <a href="https://wa.me/351000000000" class="qa orange" target="_blank">
+            <div class="qa-icon">💬</div>
+            <div class="qa-label">WhatsApp</div>
+            <div class="qa-sub">Resposta imediata</div>
+        </a>
+        <a href="mailto:unaxdaza75@gmail.com" class="qa">
+            <div class="qa-icon">✉️</div>
+            <div class="qa-label">Email direto</div>
+            <div class="qa-sub">unaxdaza75@gmail.com</div>
+        </a>
     </div>
 
     <div class="contact-layout">
-        <!-- INFO -->
         <div class="reveal">
-            <span class="section-tag">Información de contacto</span>
-            <h3 class="ci-title">Todo lo que necesitas para encontrarnos</h3>
-            <p class="ci-desc">Visítanos en nuestra sede, llámanos o escríbenos. Disponibles de lunes a viernes para cualquier consulta.</p>
+            <span class="section-tag">Informações de contacto</span>
+            <h3 class="ci-title">Tudo o que precisas para nos encontrares</h3>
+            <p class="ci-desc">Preenche o formulário com os teus dados e a carta de condução em que estás interessado. Abrirá a tua aplicação de email com tudo preparado — basta enviar.</p>
+
             <div class="contact-items-list">
-                <div class="c-item"><div class="c-item-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="c-item-label">Dirección</div><div class="c-item-value">Calle Principal 123</div><div class="c-item-sub">28001 Madrid, España</div></div></div>
-                <div class="c-item"><div class="c-item-icon"><i class="fas fa-phone"></i></div><div><div class="c-item-label">Teléfono</div><div class="c-item-value">+34 900 000 000</div><div class="c-item-sub">Llamada gratuita</div></div></div>
-                <div class="c-item"><div class="c-item-icon"><i class="fab fa-whatsapp"></i></div><div><div class="c-item-label">WhatsApp</div><div class="c-item-value">+34 600 000 000</div><div class="c-item-sub">Respuesta en minutos</div></div></div>
-                <div class="c-item"><div class="c-item-icon"><i class="fas fa-envelope"></i></div><div><div class="c-item-label">Email</div><div class="c-item-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88e1e6eee7c8e9fdfce7edfbebfdede4e9ede4e1fceda6edfb">[email&#160;protected]</a></div><div class="c-item-sub">Respuesta en menos de 24h</div></div></div>
+                <div class="c-item">
+                    <div class="c-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <div class="c-item-label">Morada</div>
+                        <div class="c-item-value">Santo Tirso</div>
+                        <div class="c-item-sub">Porto, Portugal</div>
+                    </div>
+                </div>
+
+                <div class="c-item">
+                    <div class="c-item-icon"><i class="fas fa-phone"></i></div>
+                    <div>
+                        <div class="c-item-label">Telefone</div>
+                        <div class="c-item-value">+351 000 000 000</div>
+                        <div class="c-item-sub">Chamada direta</div>
+                    </div>
+                </div>
+
+                <div class="c-item">
+                    <div class="c-item-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div>
+                        <div class="c-item-label">WhatsApp</div>
+                        <div class="c-item-value">+351 000 000 000</div>
+                        <div class="c-item-sub">Resposta em minutos</div>
+                    </div>
+                </div>
+
+                <div class="c-item">
+                    <div class="c-item-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <div class="c-item-label">Email</div>
+                        <div class="c-item-value">unaxdaza75@gmail.com</div>
+                        <div class="c-item-sub">Resposta em menos de 24h</div>
+                    </div>
+                </div>
             </div>
-            <!-- HORARIOS -->
+
             <div class="hours-box">
-                <div class="hours-title">Horario de atención</div>
+                <div class="hours-title">Horário de atendimento</div>
                 <div class="hours-row">
-    <span class="hours-day">Lunes – Viernes</span>
-    <span class="hours-time">10:00–13:00 · 15:00–20:00 
-        <span id="status-badge" class="hours-badge">Cerrado</span>
-    </span>
-</div>
-                <div class="hours-row"><span class="hours-day">Sábado</span><span class="hours-closed">Cerrado</span></div>
-                <div class="hours-row"><span class="hours-day">Domingo</span><span class="hours-closed">Cerrado</span></div>
+                    <span class="hours-day">Segunda – Sexta</span>
+                    <span class="hours-time">10:00–13:00 · 15:00–20:00 <span id="status-badge" class="hours-badge">—</span></span>
+                </div>
+                <div class="hours-row"><span class="hours-day">Sábado</span><span class="hours-closed">Encerrado</span></div>
+                <div class="hours-row"><span class="hours-day">Domingo</span><span class="hours-closed">Encerrado</span></div>
             </div>
         </div>
 
-        <!-- FORMULARIO -->
-        <div class="form-wrap reveal">
-            <div class="form-title">Envíanos un mensaje</div>
-            <div class="form-subtitle">Rellena el formulario y te contactamos en menos de 24 horas con toda la información.</div>
-            <div class="success-msg" id="successMsg"><i class="fas fa-check-circle"></i> ¡Mensaje enviado! Te contactamos muy pronto.</div>
+        <div class="form-wrap reveal" style="height: 600px;">
+            <div class="form-title">Pré-inscrição online</div>
+            <div class="form-subtitle">Preenche os teus dados. Ao clicar no botão, abrir-se-á a tua aplicação de email com a mensagem pronta para enviar à escola de condução.</div>
+
+            <div class="status-msg error" id="msgError"><i class="fas fa-exclamation-circle"></i> <span id="errorText">Por favor, preenche todos os campos obrigatórios.</span></div>
+
             <div class="contact-form" id="contactForm">
                 <div class="form-row">
-                    <div class="form-group"><label>Nombre *</label><input type="text" placeholder="Tu nombre" required></div>
-                    <div class="form-group"><label>Apellidos *</label><input type="text" placeholder="Tus apellidos" required></div>
+                    <div class="form-group">
+                        <label>Nome *</label>
+                        <input type="text" id="f_nombre" placeholder="O teu nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Apelidos *</label>
+                        <input type="text" id="f_apellidos" placeholder="Os teus apelidos">
+                    </div>
                 </div>
+
                 <div class="form-row">
-                    <div class="form-group"><label>Email *</label><input type="email" placeholder="tu@email.com" required></div>
-                    <div class="form-group"><label>Teléfono *</label><input type="tel" placeholder="+34 600 000 000" required></div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="f_email" placeholder="teu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone *</label>
+                        <input type="tel" id="f_telefono" placeholder="+351 000 000 000">
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label>Permiso de interés *</label>
-                    <select required>
-                        <option value="">— Selecciona un permiso —</option>
-                        <optgroup label="Coche"><option>Permiso B — Básico</option><option>Permiso B — Completo</option><option>Permiso B — Elite</option></optgroup>
-                        <optgroup label="Moto"><option>Permiso AM — Ciclomotor</option><option>Permiso A1</option><option>Permiso A2</option><option>Permiso A</option></optgroup>
-                        <optgroup label="Profesional"><option>Permiso C — Camión</option><option>CAP</option></optgroup>
-                        <optgroup label="Otros"><option>Curso intensivo</option><option>Consulta general</option></optgroup>
+                    <label>Categoria de interesse *</label>
+                    <select id="f_permiso">
+                        <option value="">— Seleciona uma categoria —</option>
+                        <optgroup label="Carro">
+                            <option>Categoria B — Básico</option>
+                            <option>Categoria B — Completo</option>
+                            <option>Categoria B — Elite</option>
+                        </optgroup>
+                        <optgroup label="Moto">
+                            <option>Categoria AM — Ciclomotor</option>
+                            <option>Categoria A1</option>
+                            <option>Categoria A2</option>
+                            <option>Categoria A</option>
+                        </optgroup>
+                        <optgroup label="Profissional">
+                            <option>Categoria C — Camião</option>
+                            <option>CAP</option>
+                        </optgroup>
+                        <optgroup label="Outros">
+                            <option>Curso intensivo</option>
+                            <option>Consulta geral</option>
+                        </optgroup>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>¿Cuándo quieres empezar?</label>
-                    <select>
-                        <option value="">— Selecciona —</option>
-                        <option>Lo antes posible</option>
-                        <option>En las próximas 2 semanas</option>
-                        <option>Este mes</option>
-                        <option>En los próximos 3 meses</option>
-                        <option>Aún no lo sé</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Mensaje (opcional)</label>
-                    <textarea placeholder="Cuéntanos tu situación, dudas o cualquier información relevante…"></textarea>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" id="privacy" required>
-                    <label for="privacy"><span class="check-text">He leído y acepto la <a href="#">política de privacidad</a> y el tratamiento de mis datos para gestionar mi consulta.</span></label>
-                </div>
-                <button type="button" class="submit-btn" onclick="submitForm()">Enviar consulta <i class="fas fa-arrow-right"></i></button>
-                <p class="form-note">Tus datos están seguros. Nunca los compartimos con terceros. <a href="#">Política de privacidad</a>.</p>
+
+                <button type="button" class="submit-btn" onclick="enviarMailto()">
+                    Abrir email e enviar <i class="fas fa-envelope"></i>
+                </button>
+
+                <p class="form-note">Abrir-se-á a tua aplicação de email com a mensagem pronta. Basta enviar.</p>
             </div>
         </div>
     </div>
 
-    <!-- MAPA -->
     <div class="map-section reveal">
-        <span class="section-tag">Cómo llegar</span>
-        <h3 style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--text);margin:10px 0 28px;transition:color var(--t)">Encuéntranos <em style="font-style:italic;color:var(--text-muted)">en el mapa</em></h3>
-        <!--
-        ╔══════════════════════════════════════════════╗
-        ║  🗺️  MAPA GOOGLE MAPS                        ║
-        ║  Cuando tengas la URL de Google Maps:        ║
-        ║  Reemplaza el .photo-placeholder por:        ║
-        ║  <iframe                                     ║
-        ║    src="TU_URL_EMBED_GOOGLE_MAPS"            ║
-        ║    width="100%" height="450"                 ║
-        ║    style="border:0;display:block"            ║
-        ║    allowfullscreen loading="lazy">           ║
-        ║  </iframe>                                   ║
-        ╚══════════════════════════════════════════════╝
-        -->
+        <span class="section-tag">Como chegar</span>
+        <h3 style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--text);margin:10px 0 28px;transition:color var(--t)">Encontra-nos <em style="font-style:italic;color:var(--text-muted)">no mapa</em></h3>
         <div class="map-container">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11981.726239324073!2d-8.493772016159246!3d41.3429726073223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24f58e9dd59e99%3A0xefdc0bda708b73f8!2sA%20Desportiva!5e0!3m2!1ses!2spt!4v1774261755785!5m2!1ses!2spt" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11981.726239324073!2d-8.493772016159246!3d41.3429726073223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd24f58e9dd59e99%3A0xefdc0bda708b73f8!2sA%20Desportiva!5e0!3m2!1ses!2spt!4v1774261755785!5m2!1ses!2spt" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-
     </div>
 </section>
-
-
 
 <!-- FOOTER -->
 <footer>
     <div class="footer-grid">
         <div class="footer-brand">
-            <!-- 👉 LOGO FOOTER: <img src="logo-blanco.png" alt="AutoEscuela Elite" style="height:48px;margin-bottom:12px;display:block"> -->
             <img src="images/logo/desportiva Main Logo.png" alt="Logo Desportiva" width="160" height="40" style="height: 40px; width: auto; margin-bottom: 12px;">
-            <p>Formando condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+            <p>Formação de condutores responsáveis desde 2009. Comprometidos com a sua segurança.</p>
+        </div>
+        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permissão B</a></li><li><a href="cursos.html">Permissão A2</a></li><li><a href="cursos.html">Permissão A</a></li><li><a href="cursos.html">Permissão AM</a></li><li><a href="cursos.html">Permissão C</a></li></ul></div>
+        <div class="footer-col"><h4>Nós</h4><ul><li><a href="proceso.html">Como funciona</a></li><li><a href="testimonios.html">Opiniões</a></li></ul><h4 style="margin-top:28px;">Legal</h4><ul><li><a href="aviso.html">Aviso legal</a></li></ul></div>
+        <div class="footer-social-col">
             <div class="footer-social">
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -285,91 +268,80 @@
                 <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
-        <div class="footer-col"><h4>Cursos</h4><ul><li><a href="cursos.html">Permiso B</a></li><li><a href="cursos.html">Permiso A2</a></li><li><a href="cursos.html">Permiso A</a></li><li><a href="cursos.html">Permiso AM</a></li><li><a href="cursos.html">Permiso C</a></li><li><a href="cursos.html">Intensivos</a></li></ul></div>
-        <div class="footer-col"><h4>Empresa</h4><ul><li><a href="instructores.html">Instructores</a></li><li><a href="proceso.html">Cómo funciona</a></li><li><a href="testimonios.html">Opiniones</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
-        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Aviso legal</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Cookies</a></li><li><a href="#">Términos</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-        <span>© 2025 Escola de Condução Desportiva. Todos los derechos reservados.</span>
-        <span>Certificados por la DGT</span>
+        <span>© 2025 Escola de Condução Desportiva. Todos os direitos reservados.</span>
     </div>
 </footer>
 
 <script src="theme.js"></script>
-
-<script>function actualizarEstadoHorario() {
-    const ahora = new Date();
-    const dia = ahora.getDay(); // 0: Domingo, 1: Lunes... 6: Sábado
-    const hora = ahora.getHours();
-    const minutos = ahora.getMinutes();
-    const horaActual = hora + minutos / 60;
-
-    const badge = document.getElementById('status-badge');
-    
-    // Definimos si es un día laboral (Lunes=1 a Viernes=5)
-    const esDiaLaboral = dia >= 1 && dia <= 5;
-    
-    // Rangos: 10:00-13:00 y 15:00-20:00
-    const abiertoMañana = horaActual >= 10 && horaActual < 13;
-    const abiertoTarde = horaActual >= 15 && horaActual < 20;
-
-    if (esDiaLaboral && (abiertoMañana || abiertoTarde)) {
-        badge.textContent = "Abierto";
-        badge.style.background = "var(--orange)"; // Color amarillo si está abierto
-        badge.style.color = "var(--blue)";
-    } else {
-        badge.textContent = "Cerrado";
-        badge.style.background = "rgba(255,255,255,0.2)"; // Grisáceo si está cerrado
-        badge.style.color = "#fff";
-    }
-}
-
-// Ejecutar al cargar la página
-actualizarEstadoHorario();
-
-// Opcional: Revisar cada minuto por si cambia el estado mientras el usuario navega
-setInterval(actualizarEstadoHorario, 60000);</script>
-
-<script>function submitForm() {
-    const form = document.getElementById('contactForm');
-    const successMsg = document.getElementById('successMsg');
-    
-    // Validación básica: comprueba si los campos requeridos están llenos
-    const requiredFields = form.querySelectorAll('[required]');
-    let allValid = true;
-    
-    requiredFields.forEach(field => {
-        if (!field.value || (field.type === 'checkbox' && !field.checked)) {
-            allValid = false;
-            field.style.borderColor = 'red';
-        } else {
-            field.style.borderColor = 'var(--border)';
-        }
-    });
-
-    if (allValid) {
-        form.style.display = 'none'; // Oculta el formulario
-        successMsg.classList.add('show'); // Muestra el mensaje de éxito
-        window.scrollTo({ top: successMsg.offsetTop - 100, behavior: 'smooth' });
-    } else {
-        alert("Por favor, rellena todos los campos obligatorios.");
-    }
-}</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <script>
-    // Detecta el movimiento del scroll
-window.onscroll = function() {
-  const btn = document.getElementById("btnSubirImage");
-  // Muestra el botón si bajamos más de 300px
-  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-    btn.style.display = "block";
-  } else {
-    btn.style.display = "none";
-  }
-};
+function enviarMailto() {
+    const msgErr = document.getElementById('msgError');
+    const errTxt = document.getElementById('errorText');
+    msgErr.classList.remove('show');
 
+    const campos = ['f_nombre','f_apellidos','f_email','f_telefono','f_permiso'];
+    let valido = true;
+    campos.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.style.borderColor = '#f44336'; valido = false; }
+        else el.style.borderColor = '';
+    });
 
+    if (!document.getElementById('privacy').checked) {
+        errTxt.textContent = 'Debes aceptar la política de privacidad.';
+        msgErr.classList.add('show');
+        return;
+    }
+    if (!valido) {
+        errTxt.textContent = 'Por favor, rellena todos los campos obligatorios.';
+        msgErr.classList.add('show');
+        return;
+    }
+
+    const nombre    = document.getElementById('f_nombre').value.trim();
+    const apellidos = document.getElementById('f_apellidos').value.trim();
+    const email     = document.getElementById('f_email').value.trim();
+    const telefono  = document.getElementById('f_telefono').value.trim();
+    const permiso   = document.getElementById('f_permiso').value;
+    const inicio    = document.getElementById('f_inicio').value || 'No especificado';
+    const mensaje   = document.getElementById('f_mensaje').value.trim() || 'Sin mensaje adicional';
+    const fecha     = new Date().toLocaleDateString('es-ES', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+    const asunto = encodeURIComponent('Nueva solicitud — ' + nombre + ' ' + apellidos);
+    const cuerpo = encodeURIComponent(
+        'NUEVA SOLICITUD — A DESPORTIVA\n' +
+        '================================\n\n' +
+        'Nombre:    ' + nombre + ' ' + apellidos + '\n' +
+        'Email:     ' + email + '\n' +
+        'Teléfono:  ' + telefono + '\n\n' +
+        'Permiso:   ' + permiso + '\n' +
+        'Inicio:    ' + inicio + '\n\n' +
+        'Mensaje:\n' + mensaje + '\n\n' +
+        '--------------------------------\n' +
+        'Enviado el: ' + fecha
+    );
+
+    window.location.href = 'mailto:unaxdaza75@gmail.com?subject=' + asunto + '&body=' + cuerpo;
+}
+
+function actualizarEstadoHorario() {
+    const ahora = new Date();
+    const dia = ahora.getDay();
+    const horaActual = ahora.getHours() + ahora.getMinutes() / 60;
+    const badge = document.getElementById('status-badge');
+    if (!badge) return;
+    const esDiaLaboral = dia >= 1 && dia <= 5;
+    const abierto = esDiaLaboral && ((horaActual >= 10 && horaActual < 13) || (horaActual >= 15 && horaActual < 20));
+    badge.textContent = abierto ? 'Abierto' : 'Cerrado';
+    badge.style.background = abierto ? 'var(--orange)' : 'rgba(255,255,255,0.2)';
+    badge.style.color = abierto ? 'var(--blue)' : '#fff';
+}
+actualizarEstadoHorario();
+setInterval(actualizarEstadoHorario, 60000);
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>
